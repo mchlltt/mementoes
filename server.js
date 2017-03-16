@@ -7,8 +7,23 @@ var favicon = require('serve-favicon');
 var sequelize = require('sequelize');
 var db = require('./models');
 
+var authConfig;
+
 // Passport
-var authConfig = require('./config/auth');
+try {
+    authConfig = require('./config/auth');
+} catch(err) {
+    authConfig =
+        {
+            google: {
+                clientID: process.env.clientID,
+                clientSecret: process.env.clientSecret,
+                callbackURL: process.env.callbackURL
+            }
+        };
+}
+
+
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var cookieParser = require('cookie-parser');
