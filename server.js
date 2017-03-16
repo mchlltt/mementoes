@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 var PORT = process.env.PORT || 3000;
 
 // Favicon
-app.use(favicon(path.join(__dirname, 'public/assets/images', 'favicon.png')));
+app.use(favicon(path.join(__dirname, 'public/assets/images', 'favicon.ico')));
 
 // Body Parser
 app.use(bodyParser.json());

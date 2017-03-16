@@ -3,10 +3,6 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 var Main = React.createClass({
 
-  componentWillMount: function(){
-    // this.props.history.pushState(null, '/dashboard/overview');
-  },
-
   render: function() {
   	const { pathname } = this.props.location;
   	let change;

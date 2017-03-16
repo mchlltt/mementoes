@@ -31,10 +31,6 @@ var Dashboard = React.createClass({
 
   render: function() {
 
-    //console.log(this.context);
-
-    // var name = this.context.router.getCurrentPath();
-
     const { pathname } = this.props.location;
       
     return (

@@ -1,6 +1,5 @@
 import React from 'react';
 import BigCalendar from 'react-big-calendar';
-import events from './events';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
@@ -13,8 +12,7 @@ let CalendarWidget = React.createClass({
         return (
             <BigCalendar
                 {...this.props}
-                events={events}
-                views={['month']}
+                views={['month', 'week', 'day']}
             />
         );
     }
