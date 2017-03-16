@@ -2,8 +2,8 @@ import React, { PropTypes, Component } from 'react';
 import {Button, FormControl} from 'react-bootstrap';
 import PostService from '../../utils/postService';
 import DatePicker from 'react-datepicker';
-import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
 
 var postEntry = new PostService('/api/new');
 
@@ -11,8 +11,7 @@ var EntryForm = React.createClass({
     getInitialState: function() {
         return {
             entry: '',
-            date: moment(),
-            dateDisplay: 'today'
+            date: moment()
         };
     },
     handleReset: function(e) {
@@ -46,11 +45,9 @@ var EntryForm = React.createClass({
         this.setState(newState);
     },
     handleDateChange: function(date) {
-        this.setState(
-            {date: date,
-            dateDisplay: 'on ' + date.format('MMMM Do')
-            }
-        )
+        this.setState({date: date});
+
+        this.props.setTerms('on ' + date.format('MMMM Do'));
     },
     render: function() {
         return (
@@ -59,12 +56,15 @@ var EntryForm = React.createClass({
                 <form className={this.props.className} onSubmit={this.onSubmit} action="">
                     <DatePicker
                         selected={this.state.date}
-                        onChange={this.handleDateChange} />
+                        onChange={this.handleDateChange}
+                        className='form-control'
+                        maxDate={new Date()}
+                    />
                     <FormControl
-                        componentClass="textarea"
-                        id="entry"
+                        componentClass='textarea'
+                        id='entry'
                         value={this.state.entry}
-                        rows="5"
+                        rows='5'
                         placeholder='Your entry'
                         onChange={this.handleEntryChange}
                         required={true}
