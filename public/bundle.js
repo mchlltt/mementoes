@@ -5795,7 +5795,7 @@
 /* 1036 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar _react = __webpack_require__(108);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactBootstrap = __webpack_require__(359);\n\nvar _postService = __webpack_require__(1037);\n\nvar _postService2 = _interopRequireDefault(_postService);\n\nvar _reactDatepicker = __webpack_require__(1064);\n\nvar _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);\n\n__webpack_require__(1066);\n\nvar _moment = __webpack_require__(920);\n\nvar _moment2 = _interopRequireDefault(_moment);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar postEntry = new _postService2.default('/api/new');\n\nvar EntryForm = _react2.default.createClass({\n    displayName: 'EntryForm',\n\n    getInitialState: function getInitialState() {\n        return {\n            entry: '',\n            date: (0, _moment2.default)()\n        };\n    },\n    handleReset: function handleReset(e) {\n        e.preventDefault();\n        this.setState({\n            entry: ''\n        });\n    },\n    onSubmit: function onSubmit(e) {\n        e.preventDefault();\n\n        var text = this.state.entry;\n        var UserId = 1;\n        var date = new Date(this.state.date);\n\n        postEntry.post({\n            UserId: UserId,\n            text: text,\n            date: date\n        });\n\n        this.setState({\n            entry: ''\n        });\n\n        alert('Posted!');\n    },\n    handleEntryChange: function handleEntryChange(event) {\n        var newState = {};\n        newState[event.target.id] = event.target.value;\n        this.setState(newState);\n    },\n    handleDateChange: function handleDateChange(date) {\n        this.setState({ date: date });\n\n        this.props.setTerms('on ' + date.format('MMMM Do'));\n    },\n    render: function render() {\n        return _react2.default.createElement(\n            'div',\n            null,\n            this.state.dateDisplay,\n            _react2.default.createElement(\n                'form',\n                { className: this.props.className, onSubmit: this.onSubmit, action: '' },\n                _react2.default.createElement(_reactDatepicker2.default, {\n                    selected: this.state.date,\n                    onChange: this.handleDateChange,\n                    className: 'form-control',\n                    maxDate: new Date()\n                }),\n                _react2.default.createElement(_reactBootstrap.FormControl, {\n                    componentClass: 'textarea',\n                    id: 'entry',\n                    value: this.state.entry,\n                    rows: '5',\n                    placeholder: 'Your entry',\n                    onChange: this.handleEntryChange,\n                    required: true\n                }),\n                _react2.default.createElement(\n                    _reactBootstrap.Button,\n                    { bsStyle: 'success', type: 'submit' },\n                    'Submit'\n                ),\n                _react2.default.createElement(\n                    _reactBootstrap.Button,\n                    { bsStyle: 'danger', onClick: this.handleReset },\n                    'Reset'\n                )\n            )\n        );\n    }\n\n});\n\nmodule.exports = EntryForm;\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/components/children/children/EntryForm.js\n// module id = 1036\n// module chunks = 0\n//# sourceURL=webpack:///./app/components/children/children/EntryForm.js?");
+	eval("'use strict';\n\nvar _react = __webpack_require__(108);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactBootstrap = __webpack_require__(359);\n\nvar _postService = __webpack_require__(1037);\n\nvar _postService2 = _interopRequireDefault(_postService);\n\nvar _reactDatepicker = __webpack_require__(1064);\n\nvar _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);\n\n__webpack_require__(1066);\n\n__webpack_require__(1165);\n\nvar _moment = __webpack_require__(920);\n\nvar _moment2 = _interopRequireDefault(_moment);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar postEntry = new _postService2.default('/api/new');\n\nvar EntryForm = _react2.default.createClass({\n    displayName: 'EntryForm',\n\n    getInitialState: function getInitialState() {\n        return {\n            entry: '',\n            date: (0, _moment2.default)()\n        };\n    },\n    handleReset: function handleReset(e) {\n        e.preventDefault();\n        this.setState({\n            entry: ''\n        });\n    },\n    onSubmit: function onSubmit(e) {\n        e.preventDefault();\n\n        var text = this.state.entry;\n        var UserId = 1;\n        var date = new Date(this.state.date);\n\n        postEntry.post({\n            UserId: UserId,\n            text: text,\n            date: date\n        });\n\n        this.setState({\n            entry: ''\n        });\n\n        alert('Posted!');\n    },\n    handleEntryChange: function handleEntryChange(event) {\n        var newState = {};\n        newState[event.target.id] = event.target.value;\n        this.setState(newState);\n    },\n    handleDateChange: function handleDateChange(date) {\n        this.setState({ date: date });\n\n        this.props.setTerms('on ' + date.format('MMMM Do'));\n    },\n    render: function render() {\n        return _react2.default.createElement(\n            'div',\n            null,\n            this.state.dateDisplay,\n            _react2.default.createElement(\n                'form',\n                { className: this.props.className, onSubmit: this.onSubmit, action: '' },\n                _react2.default.createElement(_reactDatepicker2.default, {\n                    selected: this.state.date,\n                    onChange: this.handleDateChange,\n                    className: 'form-control',\n                    maxDate: new Date(),\n                    fixedHeight: true\n                }),\n                _react2.default.createElement(_reactBootstrap.FormControl, {\n                    componentClass: 'textarea',\n                    id: 'entry',\n                    value: this.state.entry,\n                    rows: '5',\n                    placeholder: 'Your entry',\n                    onChange: this.handleEntryChange,\n                    required: true\n                }),\n                _react2.default.createElement(\n                    _reactBootstrap.Button,\n                    { bsStyle: 'success', type: 'submit' },\n                    'Submit'\n                ),\n                _react2.default.createElement(\n                    _reactBootstrap.Button,\n                    { bsStyle: 'danger', onClick: this.handleReset },\n                    'Reset'\n                )\n            )\n        );\n    }\n\n});\n\nmodule.exports = EntryForm;\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/components/children/children/EntryForm.js\n// module id = 1036\n// module chunks = 0\n//# sourceURL=webpack:///./app/components/children/children/EntryForm.js?");
 
 /***/ },
 /* 1037 */
@@ -5982,6 +5982,115 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	eval("exports = module.exports = __webpack_require__(94)();\n// imports\n\n\n// module\nexports.push([module.id, \".react-datepicker__tether-element-attached-top .react-datepicker__triangle, .react-datepicker__tether-element-attached-bottom .react-datepicker__triangle, .react-datepicker__year-read-view--down-arrow,\\n.react-datepicker__month-read-view--down-arrow {\\n  margin-left: -8px;\\n  position: absolute; }\\n  .react-datepicker__tether-element-attached-top .react-datepicker__triangle, .react-datepicker__tether-element-attached-bottom .react-datepicker__triangle, .react-datepicker__year-read-view--down-arrow,\\n  .react-datepicker__month-read-view--down-arrow, .react-datepicker__tether-element-attached-top .react-datepicker__triangle::before, .react-datepicker__tether-element-attached-bottom .react-datepicker__triangle::before, .react-datepicker__year-read-view--down-arrow::before,\\n  .react-datepicker__month-read-view--down-arrow::before {\\n    box-sizing: content-box;\\n    position: absolute;\\n    border: 8px solid transparent;\\n    height: 0;\\n    width: 1px; }\\n  .react-datepicker__tether-element-attached-top .react-datepicker__triangle::before, .react-datepicker__tether-element-attached-bottom .react-datepicker__triangle::before, .react-datepicker__year-read-view--down-arrow::before,\\n  .react-datepicker__month-read-view--down-arrow::before {\\n    content: \\\"\\\";\\n    z-index: -1;\\n    border-width: 8px;\\n    left: -8px;\\n    border-bottom-color: #aeaeae; }\\n\\n.react-datepicker__tether-element-attached-top .react-datepicker__triangle {\\n  top: 0;\\n  margin-top: -8px; }\\n  .react-datepicker__tether-element-attached-top .react-datepicker__triangle, .react-datepicker__tether-element-attached-top .react-datepicker__triangle::before {\\n    border-top: none;\\n    border-bottom-color: #f0f0f0; }\\n  .react-datepicker__tether-element-attached-top .react-datepicker__triangle::before {\\n    top: -1px;\\n    border-bottom-color: #aeaeae; }\\n\\n.react-datepicker__tether-element-attached-bottom .react-datepicker__triangle, .react-datepicker__year-read-view--down-arrow,\\n.react-datepicker__month-read-view--down-arrow {\\n  bottom: 0;\\n  margin-bottom: -8px; }\\n  .react-datepicker__tether-element-attached-bottom .react-datepicker__triangle, .react-datepicker__year-read-view--down-arrow,\\n  .react-datepicker__month-read-view--down-arrow, .react-datepicker__tether-element-attached-bottom .react-datepicker__triangle::before, .react-datepicker__year-read-view--down-arrow::before,\\n  .react-datepicker__month-read-view--down-arrow::before {\\n    border-bottom: none;\\n    border-top-color: #fff; }\\n  .react-datepicker__tether-element-attached-bottom .react-datepicker__triangle::before, .react-datepicker__year-read-view--down-arrow::before,\\n  .react-datepicker__month-read-view--down-arrow::before {\\n    bottom: -1px;\\n    border-top-color: #aeaeae; }\\n\\n.react-datepicker {\\n  font-family: \\\"Helvetica Neue\\\", Helvetica, Arial, sans-serif;\\n  font-size: 0.8rem;\\n  background-color: #fff;\\n  color: #000;\\n  border: 1px solid #aeaeae;\\n  border-radius: 0.3rem;\\n  display: inline-block;\\n  position: relative; }\\n\\n.react-datepicker__triangle {\\n  position: absolute;\\n  left: 50px; }\\n\\n.react-datepicker__tether-element-attached-bottom.react-datepicker__tether-element {\\n  margin-top: -20px; }\\n\\n.react-datepicker__header {\\n  text-align: center;\\n  background-color: #f0f0f0;\\n  border-bottom: 1px solid #aeaeae;\\n  border-top-left-radius: 0.3rem;\\n  border-top-right-radius: 0.3rem;\\n  padding-top: 8px;\\n  position: relative; }\\n\\n.react-datepicker__year-dropdown-container--select,\\n.react-datepicker__month-dropdown-container--select,\\n.react-datepicker__year-dropdown-container--scroll,\\n.react-datepicker__month-dropdown-container--scroll {\\n  display: inline-block;\\n  margin: 0 2px; }\\n\\n.react-datepicker__current-month {\\n  margin-top: 0;\\n  color: #000;\\n  font-weight: bold;\\n  font-size: 0.944rem; }\\n\\n.react-datepicker__navigation {\\n  line-height: 1.7rem;\\n  text-align: center;\\n  cursor: pointer;\\n  position: absolute;\\n  top: 10px;\\n  width: 0;\\n  border: 0.45rem solid transparent;\\n  z-index: 1; }\\n  .react-datepicker__navigation--previous {\\n    left: 10px;\\n    border-right-color: #ccc; }\\n    .react-datepicker__navigation--previous:hover {\\n      border-right-color: #b3b2b2; }\\n  .react-datepicker__navigation--next {\\n    right: 10px;\\n    border-left-color: #ccc; }\\n    .react-datepicker__navigation--next:hover {\\n      border-left-color: #b3b2b2; }\\n  .react-datepicker__navigation--years {\\n    position: relative;\\n    top: 0;\\n    display: block;\\n    margin-left: auto;\\n    margin-right: auto; }\\n    .react-datepicker__navigation--years-previous {\\n      top: 4px;\\n      border-top-color: #ccc; }\\n      .react-datepicker__navigation--years-previous:hover {\\n        border-top-color: #b3b2b2; }\\n    .react-datepicker__navigation--years-upcoming {\\n      top: -4px;\\n      border-bottom-color: #ccc; }\\n      .react-datepicker__navigation--years-upcoming:hover {\\n        border-bottom-color: #b3b2b2; }\\n\\n.react-datepicker__month-container {\\n  display: inline;\\n  float: left; }\\n\\n.react-datepicker__month {\\n  margin: 0.4rem;\\n  text-align: center; }\\n\\n.react-datepicker__week-number {\\n  color: #ccc;\\n  display: inline-block;\\n  width: 1.7rem;\\n  line-height: 1.7rem;\\n  text-align: center;\\n  margin: 0.166rem; }\\n\\n.react-datepicker__day-name,\\n.react-datepicker__day {\\n  color: #000;\\n  display: inline-block;\\n  width: 1.7rem;\\n  line-height: 1.7rem;\\n  text-align: center;\\n  margin: 0.166rem; }\\n\\n.react-datepicker__day {\\n  cursor: pointer; }\\n  .react-datepicker__day:hover {\\n    border-radius: 0.3rem;\\n    background-color: #f0f0f0; }\\n  .react-datepicker__day--today {\\n    font-weight: bold; }\\n  .react-datepicker__day--highlighted {\\n    border-radius: 0.3rem;\\n    background-color: #3dcc4a;\\n    color: #fff; }\\n    .react-datepicker__day--highlighted:hover {\\n      background-color: #32be3f; }\\n  .react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range {\\n    border-radius: 0.3rem;\\n    background-color: #216ba5;\\n    color: #fff; }\\n    .react-datepicker__day--selected:hover, .react-datepicker__day--in-selecting-range:hover, .react-datepicker__day--in-range:hover {\\n      background-color: #1d5d90; }\\n  .react-datepicker__day--keyboard-selected {\\n    border-radius: 0.3rem;\\n    background-color: #2a87d0;\\n    color: #fff; }\\n    .react-datepicker__day--keyboard-selected:hover {\\n      background-color: #1d5d90; }\\n  .react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range) {\\n    background-color: rgba(33, 107, 165, 0.5); }\\n  .react-datepicker__month--selecting-range .react-datepicker__day--in-range:not(.react-datepicker__day--in-selecting-range) {\\n    background-color: #f0f0f0;\\n    color: #000; }\\n  .react-datepicker__day--disabled {\\n    cursor: default;\\n    color: #ccc; }\\n    .react-datepicker__day--disabled:hover {\\n      background-color: transparent; }\\n\\n.react-datepicker__input-container {\\n  position: relative;\\n  display: inline-block; }\\n\\n.react-datepicker__year-read-view,\\n.react-datepicker__month-read-view {\\n  border: 1px solid transparent;\\n  border-radius: 0.3rem; }\\n  .react-datepicker__year-read-view:hover,\\n  .react-datepicker__month-read-view:hover {\\n    cursor: pointer; }\\n    .react-datepicker__year-read-view:hover .react-datepicker__year-read-view--down-arrow,\\n    .react-datepicker__year-read-view:hover .react-datepicker__month-read-view--down-arrow,\\n    .react-datepicker__month-read-view:hover .react-datepicker__year-read-view--down-arrow,\\n    .react-datepicker__month-read-view:hover .react-datepicker__month-read-view--down-arrow {\\n      border-top-color: #b3b2b2; }\\n  .react-datepicker__year-read-view--down-arrow,\\n  .react-datepicker__month-read-view--down-arrow {\\n    border-top-color: #ccc;\\n    float: right;\\n    margin-left: 20px;\\n    top: 8px;\\n    position: relative;\\n    border-width: 0.45rem; }\\n\\n.react-datepicker__year-dropdown,\\n.react-datepicker__month-dropdown {\\n  background-color: #f0f0f0;\\n  position: absolute;\\n  width: 50%;\\n  left: 25%;\\n  top: 30px;\\n  text-align: center;\\n  border-radius: 0.3rem;\\n  border: 1px solid #aeaeae; }\\n  .react-datepicker__year-dropdown:hover,\\n  .react-datepicker__month-dropdown:hover {\\n    cursor: pointer; }\\n  .react-datepicker__year-dropdown--scrollable,\\n  .react-datepicker__month-dropdown--scrollable {\\n    height: 150px;\\n    overflow-y: scroll; }\\n\\n.react-datepicker__year-option,\\n.react-datepicker__month-option {\\n  line-height: 20px;\\n  width: 100%;\\n  display: block;\\n  margin-left: auto;\\n  margin-right: auto; }\\n  .react-datepicker__year-option:first-of-type,\\n  .react-datepicker__month-option:first-of-type {\\n    border-top-left-radius: 0.3rem;\\n    border-top-right-radius: 0.3rem; }\\n  .react-datepicker__year-option:last-of-type,\\n  .react-datepicker__month-option:last-of-type {\\n    -webkit-user-select: none;\\n    -moz-user-select: none;\\n    -ms-user-select: none;\\n    user-select: none;\\n    border-bottom-left-radius: 0.3rem;\\n    border-bottom-right-radius: 0.3rem; }\\n  .react-datepicker__year-option:hover,\\n  .react-datepicker__month-option:hover {\\n    background-color: #ccc; }\\n    .react-datepicker__year-option:hover .react-datepicker__navigation--years-upcoming,\\n    .react-datepicker__month-option:hover .react-datepicker__navigation--years-upcoming {\\n      border-bottom-color: #b3b2b2; }\\n    .react-datepicker__year-option:hover .react-datepicker__navigation--years-previous,\\n    .react-datepicker__month-option:hover .react-datepicker__navigation--years-previous {\\n      border-top-color: #b3b2b2; }\\n  .react-datepicker__year-option--selected,\\n  .react-datepicker__month-option--selected {\\n    position: absolute;\\n    left: 15px; }\\n\\n.react-datepicker__close-icon {\\n  background-color: transparent;\\n  border: 0;\\n  cursor: pointer;\\n  display: inline-block;\\n  height: 0;\\n  outline: 0;\\n  padding: 0;\\n  vertical-align: middle; }\\n  .react-datepicker__close-icon::after {\\n    background-color: #216ba5;\\n    border-radius: 50%;\\n    bottom: 0;\\n    box-sizing: border-box;\\n    color: #fff;\\n    content: \\\"\\\\D7\\\";\\n    cursor: pointer;\\n    font-size: 12px;\\n    height: 16px;\\n    width: 16px;\\n    line-height: 1;\\n    margin: -8px auto 0;\\n    padding: 2px;\\n    position: absolute;\\n    right: 7px;\\n    text-align: center;\\n    top: 50%; }\\n\\n.react-datepicker__today-button {\\n  background: #f0f0f0;\\n  border-top: 1px solid #aeaeae;\\n  cursor: pointer;\\n  text-align: center;\\n  font-weight: bold;\\n  padding: 5px 0;\\n  clear: left; }\\n\\n.react-datepicker__tether-element {\\n  z-index: 2147483647; }\\n\\n.react-datepicker__portal {\\n  position: fixed;\\n  width: 100vw;\\n  height: 100vh;\\n  background-color: rgba(0, 0, 0, 0.8);\\n  left: 0;\\n  top: 0;\\n  justify-content: center;\\n  align-items: center;\\n  display: flex;\\n  z-index: 2147483647; }\\n  .react-datepicker__portal .react-datepicker__day-name,\\n  .react-datepicker__portal .react-datepicker__day {\\n    width: 3rem;\\n    line-height: 3rem; }\\n  @media (max-width: 400px), (max-height: 550px) {\\n    .react-datepicker__portal .react-datepicker__day-name,\\n    .react-datepicker__portal .react-datepicker__day {\\n      width: 2rem;\\n      line-height: 2rem; } }\\n  .react-datepicker__portal .react-datepicker__current-month {\\n    font-size: 1.44rem; }\\n  .react-datepicker__portal .react-datepicker__navigation {\\n    border: 0.81rem solid transparent; }\\n  .react-datepicker__portal .react-datepicker__navigation--previous {\\n    border-right-color: #ccc; }\\n    .react-datepicker__portal .react-datepicker__navigation--previous:hover {\\n      border-right-color: #b3b2b2; }\\n  .react-datepicker__portal .react-datepicker__navigation--next {\\n    border-left-color: #ccc; }\\n    .react-datepicker__portal .react-datepicker__navigation--next:hover {\\n      border-left-color: #b3b2b2; }\\n\", \"\"]);\n\n// exports\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./~/css-loader!./~/react-datepicker/dist/react-datepicker.css\n// module id = 1067\n// module chunks = 0\n//# sourceURL=webpack:///./~/react-datepicker/dist/react-datepicker.css?./~/css-loader");
+
+/***/ },
+/* 1068 */,
+/* 1069 */,
+/* 1070 */,
+/* 1071 */,
+/* 1072 */,
+/* 1073 */,
+/* 1074 */,
+/* 1075 */,
+/* 1076 */,
+/* 1077 */,
+/* 1078 */,
+/* 1079 */,
+/* 1080 */,
+/* 1081 */,
+/* 1082 */,
+/* 1083 */,
+/* 1084 */,
+/* 1085 */,
+/* 1086 */,
+/* 1087 */,
+/* 1088 */,
+/* 1089 */,
+/* 1090 */,
+/* 1091 */,
+/* 1092 */,
+/* 1093 */,
+/* 1094 */,
+/* 1095 */,
+/* 1096 */,
+/* 1097 */,
+/* 1098 */,
+/* 1099 */,
+/* 1100 */,
+/* 1101 */,
+/* 1102 */,
+/* 1103 */,
+/* 1104 */,
+/* 1105 */,
+/* 1106 */,
+/* 1107 */,
+/* 1108 */,
+/* 1109 */,
+/* 1110 */,
+/* 1111 */,
+/* 1112 */,
+/* 1113 */,
+/* 1114 */,
+/* 1115 */,
+/* 1116 */,
+/* 1117 */,
+/* 1118 */,
+/* 1119 */,
+/* 1120 */,
+/* 1121 */,
+/* 1122 */,
+/* 1123 */,
+/* 1124 */,
+/* 1125 */,
+/* 1126 */,
+/* 1127 */,
+/* 1128 */,
+/* 1129 */,
+/* 1130 */,
+/* 1131 */,
+/* 1132 */,
+/* 1133 */,
+/* 1134 */,
+/* 1135 */,
+/* 1136 */,
+/* 1137 */,
+/* 1138 */,
+/* 1139 */,
+/* 1140 */,
+/* 1141 */,
+/* 1142 */,
+/* 1143 */,
+/* 1144 */,
+/* 1145 */,
+/* 1146 */,
+/* 1147 */,
+/* 1148 */,
+/* 1149 */,
+/* 1150 */,
+/* 1151 */,
+/* 1152 */,
+/* 1153 */,
+/* 1154 */,
+/* 1155 */,
+/* 1156 */,
+/* 1157 */,
+/* 1158 */,
+/* 1159 */,
+/* 1160 */,
+/* 1161 */,
+/* 1162 */,
+/* 1163 */,
+/* 1164 */,
+/* 1165 */
+/***/ function(module, exports, __webpack_require__) {
+
+	eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = __webpack_require__(1166);\nif(typeof content === 'string') content = [[module.id, content, '']];\n// add the styles to the DOM\nvar update = __webpack_require__(107)(content, {});\nif(content.locals) module.exports = content.locals;\n// Hot Module Replacement\nif(false) {\n\t// When the styles change, update the <style> tags\n\tif(!content.locals) {\n\t\tmodule.hot.accept(\"!!../../../../node_modules/css-loader/index.js!./datepicker.css\", function() {\n\t\t\tvar newContent = require(\"!!../../../../node_modules/css-loader/index.js!./datepicker.css\");\n\t\t\tif(typeof newContent === 'string') newContent = [[module.id, newContent, '']];\n\t\t\tupdate(newContent);\n\t\t});\n\t}\n\t// When the module is disposed, remove the <style> tags\n\tmodule.hot.dispose(function() { update(); });\n}\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/components/children/children/datepicker.css\n// module id = 1165\n// module chunks = 0\n//# sourceURL=webpack:///./app/components/children/children/datepicker.css?");
+
+/***/ },
+/* 1166 */
+/***/ function(module, exports, __webpack_require__) {
+
+	eval("exports = module.exports = __webpack_require__(94)();\n// imports\n\n\n// module\nexports.push([module.id, \".react-datepicker {\\n    font-size: 1em;\\n}\\n.react-datepicker__header {\\n    padding-top: 0.8em;\\n}\\n.react-datepicker__month {\\n    margin: 0.4em 1em;\\n}\\n.react-datepicker__day-name, .react-datepicker__day {\\n    width: 1.9em;\\n    line-height: 1.9em;\\n    margin: 0.166em;\\n}\\n.react-datepicker__current-month {\\n    font-size: 1em;\\n}\\n.react-datepicker__navigation {\\n    top: 1em;\\n    line-height: 1.7em;\\n    border: 0.45em solid transparent;\\n}\\n.react-datepicker__navigation--previous {\\n    border-right-color: #ccc;\\n    left: 1em;\\n}\\n.react-datepicker__navigation--next {\\n    border-left-color: #ccc;\\n    right: 1em;\\n}\", \"\"]);\n\n// exports\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./~/css-loader!./app/components/children/children/datepicker.css\n// module id = 1166\n// module chunks = 0\n//# sourceURL=webpack:///./app/components/children/children/datepicker.css?./~/css-loader");
 
 /***/ }
 /******/ ]);

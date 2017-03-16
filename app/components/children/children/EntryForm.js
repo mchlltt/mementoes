@@ -3,6 +3,7 @@ import {Button, FormControl} from 'react-bootstrap';
 import PostService from '../../utils/postService';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import './datepicker.css';
 import moment from 'moment';
 
 var postEntry = new PostService('/api/new');
@@ -59,6 +60,7 @@ var EntryForm = React.createClass({
                         onChange={this.handleDateChange}
                         className='form-control'
                         maxDate={new Date()}
+                        fixedHeight={true}
                     />
                     <FormControl
                         componentClass='textarea'
