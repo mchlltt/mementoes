@@ -1,30 +1,46 @@
 var express = require('express');
-var app = express();
-var authConfig = require('./config/auth');
-var passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var bodyParser = require('body-parser');
+var path = require('path');
+var favicon = require('serve-favicon');
+
+// Sequelize
 var sequelize = require('sequelize');
 var db = require('./models');
 
-// Serve application file depending on environment
-app.get('/app.js', function (req, res) {
-    if (process.env.PRODUCTION) {
-        res.sendFile(__dirname + '/build/app.js');
-    } else {
-        res.redirect('//localhost:9090/build/app.js');
-    }
+// Passport
+var authConfig = require('./config/auth');
+var passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+
+// Initialize app.
+var app = express();
+
+// Serve static content for the app from the "public" directory in the application directory.
+app.use(express.static(path.join(__dirname, 'public')));
+
+var PORT = process.env.PORT || 3000;
+
+// Favicon
+app.use(favicon(path.join(__dirname, 'public/assets/images', 'favicon.png')));
+
+// Body Parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Import routes and give the server access to them.
+var routes = require('./controllers/controller');
+app.use('/', routes);
+
+db.sequelize.sync().then(function() {
+    app.listen(PORT, function () {
+        console.log('listening on port ' + PORT);
+    });
 });
 
-// Serve aggregate stylesheet depending on environment
-app.get('/style.css', function (req, res) {
-    if (process.env.PRODUCTION) {
-        res.sendFile(__dirname + '/build/style.css');
-    } else {
-        res.redirect('//localhost:9090/build/style.css');
-    }
-});
 
-app.use(express.static(__dirname + '/build'));
+/// Passport stuff here for now.
 
 passport.serializeUser(function (user, done) {
     // done(null, user.id);
@@ -58,9 +74,6 @@ passport.use(new GoogleStrategy(
     }
 ));
 
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-
 app.use(cookieParser());
 app.use(session({
     secret: 'keyboard cat',
@@ -70,6 +83,8 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 
 // GET /auth/google
 //   Use passport.authenticate() as route middleware to authenticate the
@@ -90,7 +105,6 @@ app.get('/auth/google/callback',
     }),
     function (req, res) {
         // Authenticated successfully
-        console.log('success');
         res.redirect('/dashboard/calendar');
     });
 //
@@ -102,7 +116,7 @@ app.get('/auth/google/callback',
 
 app.get('/logout', function (req, res) {
     req.logout();
-    res.redirect('/');
+    res.redirect('/login');
 });
 
 //
@@ -114,47 +128,3 @@ app.get('/logout', function (req, res) {
 //         return res.redirect('/login');
 //     }
 // }
-
-// Serve index page
-app.get('*', function (req, res) {
-    res.sendFile(__dirname + '/build/index.html');
-});
-
-
-
-
-/*************************************************************
- *
- * Webpack Dev Server
- *
- * See: http://webpack.github.io/docs/webpack-dev-server.html
- *
- *************************************************************/
-
-if (!process.env.PRODUCTION) {
-    var webpack = require('webpack');
-    var WebpackDevServer = require('webpack-dev-server');
-    var config = require('./webpack.local.config');
-
-    new WebpackDevServer(webpack(config), {
-        publicPath: config.output.publicPath,
-        hot: true,
-        noInfo: true,
-        historyApiFallback: true
-    }).listen(9090, 'localhost', function (err, result) {
-        if (err) {
-            console.log(err);
-        }
-    });
-}
-
-var port = process.env.PORT || 8080;
-db.sequelize.sync().then(function() {
-    var server =
-        app.listen(port, function () {
-            var host = server.address().address;
-            var port = server.address().port;
-
-            console.log('Essential React listening at http://%s:%s', host, port);
-        });
-});
