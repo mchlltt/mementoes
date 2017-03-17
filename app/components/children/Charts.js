@@ -5,7 +5,7 @@ var Charts = React.createClass({
   render: function() {
     return (
 
-      <div key="charts">
+      <div key="/dashboard/charts">
           <a href="#/dashboard/calendar" className="pull-right btn btn-primary btn-outline btn-rounded">Back to Calendar</a>
           <h2>Charts</h2>
           

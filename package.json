@@ -1,7 +1,7 @@
 {
-  "name": "essential-react",
-  "version": "0.3.0",
-  "description": "A minimal skeleton for building testable React apps using ES6.",
+  "name": "Mementoes",
+  "version": "1.0.0",
+  "description": "A React.js diary application.",
   "main": "server.js",
   "scripts": {
     "dev": "webpack -w && node server.js",
@@ -22,6 +22,7 @@
     "cookie-parser": "^1.4.3",
     "css-loader": "^0.18.0",
     "express": "^4.14.1",
+    "express-partials": "^0.3.0",
     "express-router": "^0.0.1",
     "express-session": "^1.15.1",
     "extract-text-webpack-plugin": "^2.1.0",
@@ -54,6 +55,7 @@
     "serve-favicon": "^2.4.1",
     "style-loader": "^0.12.3",
     "url-loader": "^0.5.6",
+    "util": "^0.10.3",
     "webpack": "^1.12.1"
   },
   "devDependencies": {

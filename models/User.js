@@ -3,15 +3,10 @@ var Sequelize = require('sequelize');
 // Model for tracking transactions
 module.exports = function(sequelize, DataTypes) {
     var User = sequelize.define('User', {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            allowNull: false,
-            primaryKey: true
-        },
         googleId: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: false,
+            primaryKey: true
         },
         createdAt: {
             type: DataTypes.DATE,
@@ -26,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function (models) {
-                User.hasMany(models.Entry, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
+                User.hasMany(models.Entry, {foreignKey: 'googleId', allowNull: false});
             }
         }
     });

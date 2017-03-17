@@ -7,12 +7,12 @@ var router = express.Router();
 
 // Post a new entry.
 router.post('/api/new', function(req, res) {
-    var UserId = req.body.UserId;
+    var googleId = req.body.googleId;
     var date = req.body.date;
     var text = req.body.text;
-    if (UserId && date && text) {
+    if (googleId && date && text) {
         db.Entry.create({
-            UserId: UserId,
+            googleId: googleId,
             date: date,
             text: text
         }).then(function (data) {
@@ -25,8 +25,8 @@ router.post('/api/new', function(req, res) {
 
 // Get entries by UserId.
 router.get('/api/entries/:id', function(req, res) {
-   var UserId = req.params.id;
-   db.Entry.findAll({where: {UserId: UserId}}).then(
+   var googleId = req.params.id;
+   db.Entry.findAll({where: {googleId: googleId}}).then(
        function(result) {
            res.json(result);
        }

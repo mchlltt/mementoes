@@ -18,7 +18,7 @@ var Calendar = React.createClass({
         }
     },
     componentDidMount: function() {
-        getEntries.get([1]).then(function(response) {
+        getEntries.get([this.props.googleId]).then(function(response) {
             var events = [];
             response.forEach(function(event) {
                 events.push({
@@ -29,13 +29,12 @@ var Calendar = React.createClass({
 
                 });
             });
-            console.log(events);
             this.setState({ events: events });
         }.bind(this));
     },
     render: function () {
         return (
-            <div key="calendar">
+            <div key="/dashboard/calendar">
                 <h2>Calendar</h2>
                 <Jumbotron>
                     <h2>Memento Calendar</h2>

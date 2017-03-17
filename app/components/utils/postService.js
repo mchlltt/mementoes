@@ -8,7 +8,7 @@ export default class PostService {
 
     post(body) {
         axios.post(this.url, body)
-            .then((response) => {console.log(response);})
+            .then((response) => {res.json(response);})
             .catch((error) => {console.log(error)});
     }
 }

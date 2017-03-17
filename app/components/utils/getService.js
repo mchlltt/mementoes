@@ -7,7 +7,12 @@ export default class GetService {
     }
 
     get(params) {
-        let queryString = this.url + params.join('/');
+        let queryString;
+        if (params) {
+            queryString = this.url + params.join('/');
+        } else {
+            queryString = this.url;
+        }
         return axios(queryString).then(
             function(response) {
                 return response.data;

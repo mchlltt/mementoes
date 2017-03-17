@@ -25,11 +25,10 @@ var EntryForm = React.createClass({
         e.preventDefault();
 
         var text = this.state.entry;
-        var UserId = 1;
         var date = new Date(this.state.date);
 
         postEntry.post({
-            UserId: UserId,
+            googleId: this.props.googleId,
             text: text,
             date: date
         });

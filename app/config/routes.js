@@ -40,7 +40,7 @@ module.exports = (
                 <Route path="settings" component={Settings} />
                 <IndexRoute component={Calendar} />
             </Route>
-            <Route path="log-in" component={Login} />
+            <Route path="login" component={Login} />
             <IndexRoute component={Login} />
         </Route>
     </Router>

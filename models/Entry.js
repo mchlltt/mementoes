@@ -30,7 +30,7 @@ module.exports = function (sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                Entry.belongsTo(models.User, {foreignKey: {allowNull: false}, onDelete: 'CASCADE'});
+                Entry.belongsTo(models.User, {foreignKey: 'googleId', onDelete: 'CASCADE'});
             }
         }
     });
