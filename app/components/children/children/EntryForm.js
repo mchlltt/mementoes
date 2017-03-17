@@ -2,16 +2,16 @@ import React, { PropTypes, Component } from 'react';
 import {Button, FormControl} from 'react-bootstrap';
 import PostService from '../../utils/postService';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import './datepicker.css';
 import moment from 'moment';
 import {ToastContainer, ToastMessage} from 'react-toastr';
-import './animate.css';
-import './toastr.min.css';
 
+window.jQuery = require('jquery');
 
-var $ = require('jquery');
-window.jQuery = $;
+import 'react-datepicker/dist/react-datepicker.css';
+import './styles/datepicker.css';
+import './styles/animate.css';
+import './styles/toastr.min.css';
+
 
 var postEntry = new PostService('/api/new');
 
@@ -30,8 +30,10 @@ var EntryForm = React.createClass({
     handleReset: function(e) {
         e.preventDefault();
         this.setState({
-            entry: ''
+            entry: '',
+            date: moment()
         });
+        this.handleDateChange(moment());
     },
     onSubmit: function(e) {
         e.preventDefault();
@@ -46,8 +48,11 @@ var EntryForm = React.createClass({
         });
 
         this.setState({
-            entry: ''
+            entry: '',
+            date: moment()
         });
+
+        this.addAlert();
     },
     handleEntryChange: function(event) {
         var newState = {};
@@ -57,7 +62,16 @@ var EntryForm = React.createClass({
     handleDateChange: function(date) {
         this.setState({date: date});
 
-        this.props.setTerms('on ' + date.format('MMMM Do'));
+        // Get the formatted version of the date.
+        var formattedDate = date.format('MMMM Do');
+
+        // If the formatted version of the date is the same as the formatted version of today's date, use 'today'.
+        if (formattedDate === moment().format('MMMM Do')) {
+            this.props.setTerms('today');
+        // Else, use the formatted date.
+        } else {
+            this.props.setTerms('on ' + formattedDate);
+        }
     },
     render: function() {
         return (
@@ -84,7 +98,7 @@ var EntryForm = React.createClass({
                         onChange={this.handleEntryChange}
                         required={true}
                     />
-                    <Button bsStyle='success' type='submit' onClick={this.addAlert}>Submit</Button>
+                    <Button bsStyle='success' type='submit'>Submit</Button>
                     <Button bsStyle='danger' onClick={this.handleReset}>Reset</Button>
                 </form>
             </div>

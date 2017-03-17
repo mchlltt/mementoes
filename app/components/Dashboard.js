@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import $ from 'jQuery';
+import $ from 'jquery';
 import New from './children/New';
 import Charts from './children/Charts';
 import Calendar from './children/Calendar';

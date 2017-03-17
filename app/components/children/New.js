@@ -9,11 +9,19 @@ var New = React.createClass({
         };
     },
     setTerms: function (dateDisplay) {
-        this.setState(
-            {
-                dateDisplay: dateDisplay
-            }
-        );
+        if (dateDisplay) {
+            this.setState(
+                {
+                    dateDisplay: dateDisplay
+                }
+            );
+        } else {
+            this.setState(
+                {
+                    dateDisplay: 'today'
+                }
+            );
+        }
     },
     render: function () {
         return (
