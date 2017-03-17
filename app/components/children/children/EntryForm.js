@@ -36,8 +36,6 @@ var EntryForm = React.createClass({
         this.setState({
             entry: ''
         });
-
-        alert('Posted!');
     },
     handleEntryChange: function(event) {
         var newState = {};
