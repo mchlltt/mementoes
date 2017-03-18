@@ -1,0 +1,19 @@
+.rbc-time-content,
+.rbc-label {
+    display: none;
+}
+
+.rbc-allday-cell {
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.rbc-row-content,
+.rbc-event {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1;
+    height: 60px;
+}

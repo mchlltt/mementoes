@@ -18,7 +18,11 @@ router.post('/api/new', function(req, res) {
             text: text
         }).then(function(entry) {
             if (tags) {
-                entry.setTags(tags);
+                tags.forEach(function(tag) {
+                    db.Tag.findOrCreate({where: {text: tag}}).spread(function(tagInstance) {
+                        entry.addEntryHasTag(tagInstance);
+                    });
+                });
             }
         }).then(function (data) {
             res.json(data);
@@ -31,7 +35,7 @@ router.post('/api/new', function(req, res) {
 // Get entries by UserId.
 router.get('/api/entries/:id', function(req, res) {
    var googleId = req.params.id;
-   db.Entry.findAll({where: {googleId: googleId}}).then(
+   db.Entry.findAll({where: {googleId: googleId}, include: [db.Entry.tagAssociation]}).then(
        function(result) {
            res.json(result);
        }

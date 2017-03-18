@@ -9,6 +9,8 @@ var Event = React.createClass({
         return(
             <div>
                 <span><strong>{this.props.title}</strong></span>
+                <br />
+                <span>{ this.props.event.desc && ('tags: ' + this.props.event.desc)}</span>
             </div>
         )
     }

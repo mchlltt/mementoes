@@ -26,7 +26,7 @@ module.exports = function (sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                Tag.belongsToMany(models.Entry, {through: 'EntryTag'});
+                Tag.belongsToMany(models.Entry, {through: 'EntryTag', as: 'tagHasEntries', foreignKey: 'tagId'});
             }
         }
     });

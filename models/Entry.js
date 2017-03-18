@@ -31,6 +31,7 @@ module.exports = function (sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 Entry.belongsTo(models.User, {foreignKey: 'googleId', onDelete: 'CASCADE'});
+                Entry.tagAssociation = Entry.belongsToMany(models.Tag, {through: 'EntryTag', as: 'entryHasTags', foreignKey: 'entryId'});
             }
         }
     });

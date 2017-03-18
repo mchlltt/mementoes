@@ -21,12 +21,18 @@ var Calendar = React.createClass({
         getEntries.get([this.props.googleId]).then(function(response) {
             var events = [];
             response.forEach(function(event) {
+                var tags = [];
+
+                event.entryHasTags.forEach(function(tag) {
+                    tags.push(tag.text);
+                });
+
                 events.push({
                     title: event.text,
                     start: new Date(event.date),
                     end: new Date(event.date),
-                    allDay: true
-
+                    allDay: true,
+                    desc: tags.join(', ')
                 });
             });
             this.setState({ events: events });
