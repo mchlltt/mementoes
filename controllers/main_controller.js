@@ -10,11 +10,16 @@ router.post('/api/new', function(req, res) {
     var googleId = req.body.googleId;
     var date = req.body.date;
     var text = req.body.text;
+    var tags = req.body.tags;
     if (googleId && date && text) {
         db.Entry.create({
             googleId: googleId,
             date: date,
             text: text
+        }).then(function(entry) {
+            if (tags) {
+                entry.setTags(tags);
+            }
         }).then(function (data) {
             res.json(data);
         });

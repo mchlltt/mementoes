@@ -2,16 +2,19 @@ import React, { PropTypes, Component } from 'react';
 import {Button, FormControl} from 'react-bootstrap';
 import PostService from '../../utils/postService';
 import DatePicker from 'react-datepicker';
+import TagsInput from 'react-tagsinput';
+
 import moment from 'moment';
 import {ToastContainer, ToastMessage} from 'react-toastr';
 
 window.jQuery = require('jquery');
 
 import 'react-datepicker/dist/react-datepicker.css';
+import 'react-tagsinput/react-tagsinput.css';
 import './styles/datepicker.css';
 import './styles/animate.css';
 import './styles/toastr.min.css';
-
+import './styles/tags-input.css';
 
 var postEntry = new PostService('/api/new');
 
@@ -24,37 +27,42 @@ var EntryForm = React.createClass({
     getInitialState: function() {
         return {
             entry: '',
-            date: moment()
+            date: moment(),
+            tags: []
         };
     },
     handleReset: function(e) {
         e.preventDefault();
         this.setState({
             entry: '',
-            date: moment()
+            date: moment(),
+            tags: []
         });
         this.handleDateChange(moment());
     },
     onSubmit: function(e) {
         e.preventDefault();
 
+        var tags = this.state.tags;
         var text = this.state.entry;
         var date = new Date(this.state.date);
 
         postEntry.post({
             googleId: this.props.googleId,
             text: text,
+            tags: tags,
             date: date
         });
 
         this.setState({
             entry: '',
-            date: moment()
+            date: moment(),
+            tags: []
         });
 
         this.addAlert();
     },
-    handleEntryChange: function(event) {
+    handleTextChange: function(event) {
         var newState = {};
         newState[event.target.id] = event.target.value;
         this.setState(newState);
@@ -72,6 +80,9 @@ var EntryForm = React.createClass({
         } else {
             this.props.setTerms('on ' + formattedDate);
         }
+    },
+    handleChange: function(tags) {
+        this.setState({tags})
     },
     render: function() {
         return (
@@ -95,8 +106,15 @@ var EntryForm = React.createClass({
                         value={this.state.entry}
                         rows='5'
                         placeholder='Your entry'
-                        onChange={this.handleEntryChange}
+                        onChange={this.handleTextChange}
                         required={true}
+                    />
+                    <TagsInput
+                        id='tags'
+                        value={this.state.tags}
+                        onChange={this.handleChange}
+                        inputProps={{placeholder: 'Hit enter to add a tag.'}}
+                        onlyUnique
                     />
                     <Button bsStyle='success' type='submit'>Submit</Button>
                     <Button bsStyle='danger' onClick={this.handleReset}>Reset</Button>
