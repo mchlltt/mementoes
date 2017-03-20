@@ -1,5 +1,5 @@
 import React from 'react';
-import './children/styles/login.css';
+import '../styles/login.css';
 
 var Login = React.createClass({
 

@@ -21,11 +21,11 @@ var IndexRoute = router.IndexRoute;
 // Reference the high-level components
 var Main = require('../components/Main');
 var Dashboard = require('../components/Dashboard');
-var Login = require('../components/children/Login');
-var Calendar = require('../components/children/Calendar');
-var New = require('../components/children/New');
-var Charts = require('../components/children/Charts');
-var Settings = require('../components/children/Settings');
+var Login = require('../components/Login');
+var Calendar = require('../components/dashboard/calendar/Calendar');
+var New = require('../components/dashboard/new/New');
+var Charts = require('../components/dashboard/charts/Charts');
+var Settings = require('../components/dashboard/settings/Settings');
 
 // Export the Routes
 module.exports = (

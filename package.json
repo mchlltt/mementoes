@@ -20,19 +20,18 @@
     "bundle-loader": "^0.5.4",
     "classnames": "^2.2.0",
     "cookie-parser": "^1.4.3",
-    "css-loader": "^0.18.0",
+    "css-loader": "^0.27.3",
     "express": "^4.14.1",
     "express-partials": "^0.3.0",
     "express-router": "^0.0.1",
     "express-session": "^1.15.1",
-    "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.8.4",
     "font-awesome": "^4.4.0",
     "history": "^1.13.0",
     "jquery": "^2.2.4",
     "lazy": "^1.0.11",
-    "less": "^2.5.3",
-    "less-loader": "^2.2.1",
+    "less": "^2.7.2",
+    "less-loader": "^3.0.0",
     "moment": "^2.17.1",
     "mysql": "^2.13.0",
     "normalizr": "^1.1.0",
@@ -42,8 +41,8 @@
     "postcss-loader": "^0.6.0",
     "postcss-nested": "^1.0.0",
     "react": "^15.4.2",
-    "react-addons-css-transition-group": "^0.14.8",
-    "react-addons-transition-group": "^0.14.2",
+    "react-addons-css-transition-group": "^15.4.2",
+    "react-addons-transition-group": "^15.4.2",
     "react-big-calendar": "^0.12.3",
     "react-bootstrap": "^0.30.8",
     "react-datepicker": "^0.41.1",
@@ -58,10 +57,6 @@
     "style-loader": "^0.12.3",
     "url-loader": "^0.5.6",
     "util": "^0.10.3",
-    "webpack": "^1.12.1"
-  },
-  "devDependencies": {
-    "less": "^2.7.2",
-    "less-loader": "^2.2.3"
+    "webpack": "^1.13.3"
   }
 }

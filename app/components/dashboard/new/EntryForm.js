@@ -11,10 +11,10 @@ window.jQuery = require('jquery');
 
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-tagsinput/react-tagsinput.css';
-import './styles/datepicker.css';
-import './styles/animate.css';
-import './styles/toastr.min.css';
-import './styles/tags-input.css';
+import '../../../styles/datepicker.css';
+import '../../../styles/animate.css';
+import '../../../styles/toastr.min.css';
+import '../../../styles/tags-input.css';
 
 var postEntry = new PostService('/api/new');
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Dashboard from './Dashboard';
-import Login from './children/Login';
+import Login from './Login';
 
 import GetService from './utils/getService';
 

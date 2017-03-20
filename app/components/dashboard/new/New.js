@@ -1,6 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import {Jumbotron} from 'react-bootstrap';
-import EntryForm from './children/EntryForm';
+import EntryForm from './EntryForm';
 
 var New = React.createClass({
     getInitialState: function () {

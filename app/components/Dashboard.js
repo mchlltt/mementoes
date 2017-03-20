@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import $ from 'jquery';
-import New from './children/New';
-import Charts from './children/Charts';
-import Calendar from './children/Calendar';
-import Settings from './children/Settings';
+import New from './dashboard/new/New';
+import Charts from './dashboard/charts/Charts';
+import Calendar from './dashboard/calendar/Calendar';
+import Settings from './dashboard/settings/Settings';
 
 
 var Dashboard = React.createClass({
