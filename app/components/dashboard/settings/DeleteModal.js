@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import {Button, FormControl, Modal} from 'react-bootstrap';
-import PostService from '../../utils/postService';
+import PostService from '../../../utils/postService';
 
 const DeleteModal = React.createClass({
     deleteItem() {

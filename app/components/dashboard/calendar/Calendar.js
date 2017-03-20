@@ -2,7 +2,7 @@ import React, {PropTypes, Component} from 'react';
 import {Jumbotron} from 'react-bootstrap';
 import CalendarWidget from './CalendarWidget';
 
-import GetService from '../../utils/getService';
+import GetService from '../../../utils/getService';
 
 var getEntries = new GetService('api/entries/');
 

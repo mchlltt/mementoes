@@ -31,7 +31,7 @@ var New = React.createClass({
                 <h2>New Post</h2>
                 <Jumbotron>
                     <h2>What is something that made you happy {this.state.dateDisplay}?</h2>
-                    <EntryForm setTerms={this.setTerms} googleId={this.props.googleId}/>
+                    <EntryForm setTerms={this.setTerms} googleId={this.props.googleId} new={true}/>
                 </Jumbotron>
             </div>
         );

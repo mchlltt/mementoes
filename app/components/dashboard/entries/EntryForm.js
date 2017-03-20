@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import {Button, FormControl} from 'react-bootstrap';
-import PostService from '../../utils/postService';
+import PostService from '../../../utils/postService';
+import DeleteService from '../../../utils/deleteService';
 import DatePicker from 'react-datepicker';
 import TagsInput from 'react-tagsinput';
 
@@ -17,6 +18,7 @@ import '../../../styles/toastr.min.css';
 import '../../../styles/tags-input.css';
 
 var postEntry = new PostService('/api/new');
+var deleteEntry = new DeleteService('/api/delete');
 
 var ToastMessageFactory = React.createFactory(ToastMessage.jQuery);
 
@@ -84,6 +86,12 @@ var EntryForm = React.createClass({
     handleChange: function(tags) {
         this.setState({tags})
     },
+    handleDelete: function() {
+        deleteEntry({
+            googleId: this.props.googleId,
+            id: this.props.entryId
+        });
+    },
     render: function() {
         return (
             <div>
@@ -117,7 +125,13 @@ var EntryForm = React.createClass({
                         onlyUnique
                     />
                     <Button bsStyle='success' type='submit'>Submit</Button>
-                    <Button bsStyle='danger' onClick={this.handleReset}>Reset</Button>
+                    {this.props.new &&
+                        <Button bsStyle='danger' onClick={this.handleReset}>Reset</Button>
+                    }
+                    {!this.props.new &&
+                        <Button bsStyle='danger' onClick={this.handleDelete}>Delete</Button>
+                    }
+
                 </form>
             </div>
 

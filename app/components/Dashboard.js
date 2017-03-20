@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import $ from 'jquery';
-import New from './dashboard/new/New';
+import New from './dashboard/entries/New';
 import Charts from './dashboard/charts/Charts';
 import Calendar from './dashboard/calendar/Calendar';
 import Settings from './dashboard/settings/Settings';
@@ -68,6 +68,9 @@ var Dashboard = React.createClass({
                                     }
                                     {this.props.location === '/dashboard/new' &&
                                     <New googleId={this.props.googleId}/>
+                                    }
+                                    {this.props.location === '/dashboard/edit' &&
+                                    <Edit googleId={this.props.googleId} entryId={1}/>
                                     }
                                     {this.props.location === '/dashboard/charts' &&
                                     <Charts googleId={this.props.googleId}/>

@@ -4,8 +4,8 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import '../../../styles/calendar.css';
 
-import Event from './Event';
-import EventWithTags from './EventWithTags';
+import EntryEvent from './EntryEvent';
+import EntryEventWithTags from './EntryEventWithTags';
 
 BigCalendar.setLocalizer(
     BigCalendar.momentLocalizer(moment)
@@ -18,9 +18,9 @@ let CalendarWidget = React.createClass({
                 {...this.props}
                 views={['month', 'week', 'day']}
                 components={{
-                    event: EventWithTags,
+                    event: EntryEventWithTags,
                     month: {
-                        event: Event
+                        event: EntryEvent
                     }
                 }}
             />

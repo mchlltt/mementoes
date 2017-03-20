@@ -3,7 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Dashboard from './Dashboard';
 import Login from './Login';
 
-import GetService from './utils/getService';
+import GetService from '../utils/getService';
 
 var verifyService = new GetService('/api/verify');
 

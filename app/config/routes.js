@@ -23,9 +23,10 @@ var Main = require('../components/Main');
 var Dashboard = require('../components/Dashboard');
 var Login = require('../components/Login');
 var Calendar = require('../components/dashboard/calendar/Calendar');
-var New = require('../components/dashboard/new/New');
+var New = require('../components/dashboard/entries/New');
 var Charts = require('../components/dashboard/charts/Charts');
 var Settings = require('../components/dashboard/settings/Settings');
+var Edit = require('../components/dashboard/entries/Edit');
 
 // Export the Routes
 module.exports = (
@@ -38,6 +39,7 @@ module.exports = (
                 <Route path="charts" component={Charts} />
                 <Route path="new" component={New} />
                 <Route path="settings" component={Settings} />
+                <Route path="edit" component={Edit} />
                 <IndexRoute component={Calendar} />
             </Route>
             <Route path="login" component={Login} />
