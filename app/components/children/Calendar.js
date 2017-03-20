@@ -28,11 +28,13 @@ var Calendar = React.createClass({
                 });
 
                 events.push({
+                    googleId: event.googleId,
+                    id: event.id,
                     title: event.text,
                     start: new Date(event.date),
                     end: new Date(event.date),
                     allDay: true,
-                    desc: tags.join(', ')
+                    tags: tags
                 });
             });
             this.setState({ events: events });

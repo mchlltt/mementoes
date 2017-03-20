@@ -1,16 +1,20 @@
 var React = require('react');
 
-var Event = React.createClass({
+var Tags = require('./Tags');
 
-    handleClick: function() {
-        // edit or expand post
-    },
+var Event = React.createClass({
     render: function render() {
         return(
             <div>
-                <span><strong>{this.props.title}</strong></span>
+                <a href={'#/users/' + this.props.event.googleId + '/entries/' + this.props.event.id + '/edit/'} className="plain-link">
+                    <span><strong>{this.props.title}</strong></span>
+                </a>
                 <br />
-                <span>{ this.props.event.desc && ('tags: ' + this.props.event.desc)}</span>
+                <span>
+                    {this.props.event.tags &&
+                    <Tags tags={this.props.event.tags} />
+                    }
+                </span>
             </div>
         )
     }
