@@ -38,8 +38,8 @@ module.exports = (
                 <Route path="calendar" component={Calendar} />
                 <Route path="charts" component={Charts} />
                 <Route path="new" component={New} />
+                <Route path="users/:googleId/entries/:entryId/edit" component={Edit} />
                 <Route path="settings" component={Settings} />
-                <Route path="edit" component={Edit} />
                 <IndexRoute component={Calendar} />
             </Route>
             <Route path="login" component={Login} />

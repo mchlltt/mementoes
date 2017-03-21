@@ -1,10 +1,11 @@
-import React, {PropTypes, Component} from 'react';
+import React from 'react';
 import {Jumbotron} from 'react-bootstrap';
 import CalendarWidget from './CalendarWidget';
 
 import GetService from '../../../utils/getService';
 
 var getEntries = new GetService('api/entries/');
+var verifyService = new GetService('/api/verify');
 
 var Calendar = React.createClass({
     getInitialState: function() {
@@ -17,27 +18,29 @@ var Calendar = React.createClass({
             minHeight: '60vh'
         }
     },
-    componentDidMount: function() {
-        getEntries.get([this.props.googleId]).then(function(response) {
-            var events = [];
-            response.forEach(function(event) {
-                var tags = [];
+    componentWillMount: function() {
+        verifyService.get().then(function(res) {
+            getEntries.get([res.googleId]).then(function(response) {
+                var events = [];
+                response.forEach(function(event) {
+                    var tags = [];
 
-                event.entryHasTags.forEach(function(tag) {
-                    tags.push(tag.text);
-                });
+                    event.entryHasTags.forEach(function(tag) {
+                        tags.push(tag.text);
+                    });
 
-                events.push({
-                    googleId: event.googleId,
-                    id: event.id,
-                    title: event.text,
-                    start: new Date(event.date),
-                    end: new Date(event.date),
-                    allDay: true,
-                    tags: tags
+                    events.push({
+                        googleId: event.googleId,
+                        id: event.id,
+                        title: event.text,
+                        start: new Date(event.date),
+                        end: new Date(event.date),
+                        allDay: true,
+                        tags: tags
+                    });
                 });
-            });
-            this.setState({ events: events });
+                this.setState({ events: events });
+            }.bind(this));
         }.bind(this));
     },
     render: function () {

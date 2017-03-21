@@ -1,21 +1,32 @@
-import React, { PropTypes, Component } from 'react';
+import React from 'react';
 import {Jumbotron} from 'react-bootstrap';
 
-var Charts = React.createClass({
-  render: function() {
-    return (
+import GetService from '../../../utils/getService';
+var verifyService = new GetService('api/verify/');
 
-      <div key="/dashboard/charts">
-          <a href="#/dashboard/calendar" className="pull-right btn btn-primary btn-outline btn-rounded">Back to Calendar</a>
-          <h2>Charts</h2>
-          
-          <Jumbotron> 
-            <h2>Add Charts here</h2>
-          </Jumbotron> 
-        </div>
-      
-    );
-  }
+var Charts = React.createClass({
+    getInitialState: function () {
+        return {}
+    },
+    componentWillMount: function () {
+        verifyService.get().then(function (response) {
+            this.setState({googleId: response.googleId});
+        }.bind(this));
+    },
+    render: function () {
+        return (
+
+            <div key="/dashboard/charts">
+                <a href="#/dashboard/calendar" className="pull-right btn btn-primary btn-outline btn-rounded">Back to Calendar</a>
+                <h2>Charts</h2>
+
+                <Jumbotron>
+                    <h2>Add Charts here</h2>
+                </Jumbotron>
+            </div>
+
+        );
+    }
 
 });
 

@@ -6,25 +6,22 @@ import Charts from './dashboard/charts/Charts';
 import Calendar from './dashboard/calendar/Calendar';
 import Settings from './dashboard/settings/Settings';
 
+import GetService from '../utils/getService';
+var verifyService = new GetService('api/verify/');
 
 var Dashboard = React.createClass({
-
+    getInitialState: function () {
+        return {}
+    },
     componentWillMount: function () {
         this.setState({Height: $(window).height()});
+        verifyService.get().then(function (response) {
+            this.setState({googleId: response.googleId});
+        }.bind(this));
     },
-
-    componentDidMount: function () {
-
-    },
-
     componentWillUnmount: function () {
         $(window).unbind('resize', this.adjustResize);
     },
-
-    getInitialState: function () {
-        return {};
-    },
-
     render: function () {
 
         return (
@@ -64,19 +61,19 @@ var Dashboard = React.createClass({
                             {React.cloneElement(<div
                                 className='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main ng-scope ui-view'>
                                     {this.props.location === '/dashboard/calendar' &&
-                                    <Calendar googleId={this.props.googleId}/>
+                                    <Calendar/>
                                     }
                                     {this.props.location === '/dashboard/new' &&
-                                    <New googleId={this.props.googleId}/>
+                                    <New/>
                                     }
                                     {this.props.location === '/dashboard/edit' &&
-                                    <Edit googleId={this.props.googleId} entryId={1}/>
+                                    <Edit entryId={1}/>
                                     }
                                     {this.props.location === '/dashboard/charts' &&
-                                    <Charts googleId={this.props.googleId}/>
+                                    <Charts/>
                                     }
                                     {this.props.location === '/dashboard/settings' &&
-                                    <Settings googleId={this.props.googleId}/>
+                                    <Settings/>
                                     }
                                 </div> || <div />, { key: this.props.location })}
                         </ReactCSSTransitionGroup>

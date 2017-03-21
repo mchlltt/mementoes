@@ -1,7 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React from 'react';
 import {Button, FormControl} from 'react-bootstrap';
-import PostService from '../../../utils/postService';
-import DeleteService from '../../../utils/deleteService';
 import DatePicker from 'react-datepicker';
 import TagsInput from 'react-tagsinput';
 
@@ -17,8 +15,13 @@ import '../../../styles/animate.css';
 import '../../../styles/toastr.min.css';
 import '../../../styles/tags-input.css';
 
+import PostService from '../../../utils/postService';
+import DeleteService from '../../../utils/deleteService';
+import GetService from '../../../utils/getService';
+
 var postEntry = new PostService('/api/new');
 var deleteEntry = new DeleteService('/api/delete');
+var verifyService = new GetService('/api/verify');
 
 var ToastMessageFactory = React.createFactory(ToastMessage.jQuery);
 
@@ -32,6 +35,14 @@ var EntryForm = React.createClass({
             date: moment(),
             tags: []
         };
+    },
+    componentWillMount: function () {
+        verifyService.get().then(function (response) {
+            this.setState({googleId: response.googleId});
+        }.bind(this));
+    },
+    componentWillUnmount: function () {
+        this.refs.container.clear();
     },
     handleReset: function(e) {
         e.preventDefault();
@@ -50,7 +61,7 @@ var EntryForm = React.createClass({
         var date = new Date(this.state.date);
 
         postEntry.post({
-            googleId: this.props.googleId,
+            googleId: this.state.googleId,
             text: text,
             tags: tags,
             date: date
@@ -88,7 +99,7 @@ var EntryForm = React.createClass({
     },
     handleDelete: function() {
         deleteEntry({
-            googleId: this.props.googleId,
+            googleId: this.state.googleId,
             id: this.props.entryId
         });
     },

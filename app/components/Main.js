@@ -4,20 +4,17 @@ import Dashboard from './Dashboard';
 import Login from './Login';
 
 import GetService from '../utils/getService';
-
 var verifyService = new GetService('/api/verify');
 
 var Main = React.createClass({
     getInitialState: function () {
-        return {
-            auth: false,
-            googleId: null
-        };
+        return { }
     },
-    componentDidMount: function() {
+    componentWillMount: function() {
         verifyService.get().then(function(response) {
-            this.setState({ auth: response.auth,
-                            googleId: response.googleId
+            this.setState({
+                auth: response.auth,
+                googleId: response.googleId
             });
         }.bind(this));
     },
@@ -26,7 +23,7 @@ var Main = React.createClass({
 
         let change;
 
-        if (pathname.substr(0, 10) == '/dashboard')
+        if (pathname.substr(0, 10) === '/dashboard')
             change = 'internal';
         else
             change = pathname;

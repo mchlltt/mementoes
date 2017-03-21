@@ -1,6 +1,8 @@
 import React, {PropTypes, Component} from 'react';
 import {Jumbotron} from 'react-bootstrap';
 import EntryForm from './EntryForm';
+import GetService from '../../../utils/getService';
+var verifyService = new GetService('/api/verify');
 
 var New = React.createClass({
     getInitialState: function () {
@@ -10,18 +12,15 @@ var New = React.createClass({
     },
     setTerms: function (dateDisplay) {
         if (dateDisplay) {
-            this.setState(
-                {
-                    dateDisplay: dateDisplay
-                }
-            );
+            this.setState({dateDisplay: dateDisplay});
         } else {
-            this.setState(
-                {
-                    dateDisplay: 'today'
-                }
-            );
+            this.setState({dateDisplay: 'today'});
         }
+    },
+    componentWillMount: function () {
+        verifyService.get().then(function (response) {
+            this.setState({googleId: response.googleId});
+        }.bind(this));
     },
     render: function () {
         return (
