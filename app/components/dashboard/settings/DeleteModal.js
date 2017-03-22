@@ -1,11 +1,15 @@
 import React from 'react';
 import {Button, FormControl, Modal} from 'react-bootstrap';
-// import PostService from '../../../utils/postService';
+import DeleteService from '../../../utils/deleteService';
+import GetService from '../../../utils/getService';
+
+var deleteUser = new DeleteService('/api/users/');
+var logOut = new GetService('/api/logout/');
 
 const DeleteModal = React.createClass({
-    deleteItem() {
-        console.log('deleting!');
-        this.props.hideModal();
+    handleDelete() {
+        deleteUser.delete([this.props.googleId]);
+        logOut.get();
     },
     render() {
         return (
@@ -22,7 +26,7 @@ const DeleteModal = React.createClass({
                     <p>Are you sure you want to delete your account? This cannot be undone!</p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.deleteItem}>Delete</Button>
+                    <Button onClick={this.handleDelete}>Delete</Button>
                     <Button onClick={this.props.hideModal}>Cancel</Button>
                 </Modal.Footer>
             </Modal>

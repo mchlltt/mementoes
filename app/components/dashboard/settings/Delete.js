@@ -16,7 +16,7 @@ var Delete = React.createClass({
         return (
             <div>
                 {this.state.modal &&
-                    <DeleteModal hideModal={this.hideModal}/>
+                    <DeleteModal hideModal={this.hideModal} googleId={this.props.googleId}/>
                 }
                 <Button bsStyle='danger' onClick={this.showModal}>Delete Account</Button>
             </div>

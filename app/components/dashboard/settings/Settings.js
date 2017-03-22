@@ -21,8 +21,8 @@ var Settings = React.createClass({
                 <a href="#/dashboard/calendar" className="pull-right btn btn-primary btn-outline btn-rounded">Back to Calendar</a>
                 <h2>Settings</h2>
                 <Jumbotron>
-                    <Export googleId={this.props.googleId}/>
-                    <Delete googleId={this.props.googleId}/>
+                    <Export googleId={this.state.googleId}/>
+                    <Delete googleId={this.state.googleId}/>
                 </Jumbotron>
             </div>
         );

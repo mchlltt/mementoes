@@ -107,13 +107,26 @@ router.delete('/api/entries/:googleId/:entryId', function(req, res) {
         function (entry) {
             if (entry.googleId === googleId) {
                 entry.destroy();
-                res.json('deleted');
             } else {
-                res.json('permission denied.');
+                res.json('Permission denied.');
             }
         }
     );
 });
+
+// Delete user by googleId. Works but only kind of.
+router.delete('/api/users/:googleId', function(req, res) {
+    var googleId = req.params.googleId;
+
+    db.User.findById(googleId).then(
+        function(user) {
+            if (user) {
+                user.destroy();
+            }
+        }
+    );
+});
+
 
 // Default route.
 router.use('*', function (req, res) {
