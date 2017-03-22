@@ -4,7 +4,7 @@ import Export from './Export';
 import Delete from './Delete';
 
 import GetService from '../../../utils/getService';
-var verifyService = new GetService('api/verify/');
+var verifyService = new GetService('/api/verify/');
 
 var Settings = React.createClass({
     getInitialState: function () {

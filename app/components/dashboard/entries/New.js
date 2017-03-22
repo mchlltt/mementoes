@@ -1,8 +1,8 @@
-import React, {PropTypes, Component} from 'react';
+import React from 'react';
 import {Jumbotron} from 'react-bootstrap';
 import EntryForm from './EntryForm';
 import GetService from '../../../utils/getService';
-var verifyService = new GetService('/api/verify');
+var verifyService = new GetService('/api/verify/');
 
 var New = React.createClass({
     getInitialState: function () {
@@ -30,7 +30,7 @@ var New = React.createClass({
                 <h2>New Post</h2>
                 <Jumbotron>
                     <h2>What is something that made you happy {this.state.dateDisplay}?</h2>
-                    <EntryForm setTerms={this.setTerms} googleId={this.props.googleId} new={true}/>
+                    <EntryForm setTerms={this.setTerms} googleId={this.state.googleId}/>
                 </Jumbotron>
             </div>
         );

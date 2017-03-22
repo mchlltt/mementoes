@@ -1,13 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import $ from 'jquery';
 import New from './dashboard/entries/New';
 import Charts from './dashboard/charts/Charts';
-import Calendar from './dashboard/calendar/Calendar';
+import Edit from './dashboard/entries/Edit';
+import CalendarComponent from './dashboard/calendar/Calendar';
 import Settings from './dashboard/settings/Settings';
 
 import GetService from '../utils/getService';
-var verifyService = new GetService('api/verify/');
+var verifyService = new GetService('/api/verify/');
 
 var Dashboard = React.createClass({
     getInitialState: function () {
@@ -24,13 +26,15 @@ var Dashboard = React.createClass({
     },
     render: function () {
 
+        let pathname = this.props.location.split('/');
+
         return (
             <div className='dashboard-page ui-view'>
                 <div className='container-fluid'>
                     <div className='row'>
                         <div className='col-sm-3 col-md-2 sidebar'>
                             <div className='text-center'>
-                                <h2 className='brand'> Mementoes </h2>
+                                <h2 className='brand'>Mementoes</h2>
                                 <img src={'assets/images/user-icon.svg'} className='user-avatar'/>
                                 <br />
                                 <a href='/api/logout'
@@ -39,16 +43,16 @@ var Dashboard = React.createClass({
 
                             <ul className='nav nav-sidebar'>
                                 <li>
-                                    <a href='#/dashboard/calendar'>Calendar</a>
+                                    <Link to ='/dashboard/calendar'>Calendar</Link>
                                 </li>
                                 <li>
-                                    <a href='#/dashboard/new'>New Entry</a>
+                                    <Link to ='/dashboard/new'>New Entry</Link>
                                 </li>
                                 <li>
-                                    <a href='#/dashboard/charts'>Charts</a>
+                                    <Link to ='/dashboard/charts'>Charts</Link>
                                 </li>
                                 <li>
-                                    <a href='#/dashboard/settings'>Settings</a>
+                                    <Link to ='/dashboard/settings'>Settings</Link>
                                 </li>
                             </ul>
                         </div>
@@ -60,22 +64,22 @@ var Dashboard = React.createClass({
                         >
                             {React.cloneElement(<div
                                 className='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main ng-scope ui-view'>
-                                    {this.props.location === '/dashboard/calendar' &&
-                                    <Calendar/>
+                                    {pathname.indexOf('calendar') !== -1 &&
+                                    <CalendarComponent/>
                                     }
-                                    {this.props.location === '/dashboard/new' &&
+                                    {pathname.indexOf('new') !== -1 &&
                                     <New/>
                                     }
-                                    {this.props.location === '/dashboard/edit' &&
-                                    <Edit entryId={1}/>
+                                    {pathname.indexOf('edit') !== -1 &&
+                                    <Edit params={pathname}/>
                                     }
-                                    {this.props.location === '/dashboard/charts' &&
+                                    {pathname.indexOf('charts') !== -1 &&
                                     <Charts/>
                                     }
-                                    {this.props.location === '/dashboard/settings' &&
+                                    {pathname.indexOf('settings') !== -1 &&
                                     <Settings/>
                                     }
-                                </div> || <div />, { key: this.props.location })}
+                                </div> || <div />, { key: pathname.join('/') })}
                         </ReactCSSTransitionGroup>
                     </div>
                 </div>

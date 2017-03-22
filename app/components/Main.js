@@ -4,7 +4,7 @@ import Dashboard from './Dashboard';
 import Login from './Login';
 
 import GetService from '../utils/getService';
-var verifyService = new GetService('/api/verify');
+var verifyService = new GetService('/api/verify/');
 
 var Main = React.createClass({
     getInitialState: function () {

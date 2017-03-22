@@ -12,7 +12,6 @@ var Route = router.Route;
 var Router = router.Router;
 
 // Include the hashHistory prop to handle routing client side without a server
-
 var hashHistory = router.hashHistory;
 
 // Include the IndexRoute (catch-all route)

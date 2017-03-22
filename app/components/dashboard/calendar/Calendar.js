@@ -4,8 +4,8 @@ import CalendarWidget from './CalendarWidget';
 
 import GetService from '../../../utils/getService';
 
-var getEntries = new GetService('api/entries/');
-var verifyService = new GetService('/api/verify');
+var getEntries = new GetService('/api/entries/');
+var verifyService = new GetService('/api/verify/');
 
 var Calendar = React.createClass({
     getInitialState: function() {

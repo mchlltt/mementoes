@@ -6,9 +6,17 @@ export default class DeleteService {
         this.url = url;
     }
 
-    post(body) {
-        axios.delete(this.url, body)
-            .then((response) => {})
-            .catch((error) => {console.log(error)});
+    delete(params) {
+        let queryString;
+        if (params) {
+            queryString = this.url + params.join('/');
+        } else {
+            queryString = this.url;
+        }
+        return axios.delete(queryString).then(
+            function(response) {
+                return response.data;
+            }
+        );
     }
 }

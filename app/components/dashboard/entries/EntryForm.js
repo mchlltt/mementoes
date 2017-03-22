@@ -15,19 +15,21 @@ import '../../../styles/animate.css';
 import '../../../styles/toastr.min.css';
 import '../../../styles/tags-input.css';
 
+import PutService from '../../../utils/putService';
 import PostService from '../../../utils/postService';
 import DeleteService from '../../../utils/deleteService';
 import GetService from '../../../utils/getService';
 
-var postEntry = new PostService('/api/new');
-var deleteEntry = new DeleteService('/api/delete');
-var verifyService = new GetService('/api/verify');
+var postEntry = new PostService('/api/entries/');
+var putEntry = new PutService('/api/entries/');
+var deleteEntry = new DeleteService('/api/entries/');
+var getEntries = new GetService('/api/entries/');
 
 var ToastMessageFactory = React.createFactory(ToastMessage.jQuery);
 
 var EntryForm = React.createClass({
-    addAlert: function() {
-        this.refs.container.success('Posted!');
+    addAlert: function(message) {
+        this.refs.container.success(message);
     },
     getInitialState: function() {
         return {
@@ -37,9 +39,27 @@ var EntryForm = React.createClass({
         };
     },
     componentWillMount: function () {
-        verifyService.get().then(function (response) {
-            this.setState({googleId: response.googleId});
-        }.bind(this));
+        if (this.props.entryId) {
+            getEntries.get([this.props.googleId, this.props.entryId]).then(function(response) {
+                let entry = response[0].text;
+                let date = moment(response[0].date);
+                let tagsResponse = response[0].entryHasTags;
+                let tags = [];
+                tagsResponse.forEach(function(tag) {
+                    tags.push(tag.text);
+                });
+
+                this.setState({
+                    entry: entry,
+                    date: date,
+                    tags: tags
+
+                });
+
+                this.handleDateChange(date);
+
+            }.bind(this));
+        }
     },
     componentWillUnmount: function () {
         this.refs.container.clear();
@@ -60,20 +80,31 @@ var EntryForm = React.createClass({
         var text = this.state.entry;
         var date = new Date(this.state.date);
 
-        postEntry.post({
-            googleId: this.state.googleId,
-            text: text,
-            tags: tags,
-            date: date
-        });
+        if (this.props.entryId) {
+            putEntry.put({
+                entryId: this.props.entryId,
+                googleId: this.props.googleId,
+                text: text,
+                tags: tags,
+                date: date
+            });
+            this.addAlert('Edit saved!');
+        } else {
+            postEntry.post({
+                googleId: this.props.googleId,
+                text: text,
+                tags: tags,
+                date: date
+            });
 
-        this.setState({
-            entry: '',
-            date: moment(),
-            tags: []
-        });
+            this.setState({
+                entry: '',
+                date: moment(),
+                tags: []
+            });
 
-        this.addAlert();
+            this.addAlert('Posted!');
+        }
     },
     handleTextChange: function(event) {
         var newState = {};
@@ -98,10 +129,9 @@ var EntryForm = React.createClass({
         this.setState({tags})
     },
     handleDelete: function() {
-        deleteEntry({
-            googleId: this.state.googleId,
-            id: this.props.entryId
-        });
+        deleteEntry.delete([this.props.googleId, this.props.entryId]).then(function() {
+            this.addAlert('Entry deleted!');
+        }.bind(this));
     },
     render: function() {
         return (
@@ -135,14 +165,18 @@ var EntryForm = React.createClass({
                         inputProps={{placeholder: 'Hit enter to add a tag.'}}
                         onlyUnique
                     />
-                    <Button bsStyle='success' type='submit'>Submit</Button>
-                    {this.props.new &&
-                        <Button bsStyle='danger' onClick={this.handleReset}>Reset</Button>
+                    {this.props.entryId &&
+                        <div>
+                            <Button bsStyle='success' type='submit'>Save</Button>
+                            <Button bsStyle='danger' onClick={this.handleDelete}>Delete</Button>
+                        </div>
                     }
-                    {!this.props.new &&
-                        <Button bsStyle='danger' onClick={this.handleDelete}>Delete</Button>
+                    {!this.props.entryId &&
+                        <div>
+                            <Button bsStyle='success' type='submit'>Submit</Button>
+                            <Button bsStyle='danger' onClick={this.handleReset}>Reset</Button>
+                        </div>
                     }
-
                 </form>
             </div>
 

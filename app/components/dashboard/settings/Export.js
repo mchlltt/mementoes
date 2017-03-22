@@ -2,8 +2,8 @@ import React from 'react';
 import {CSVLink} from 'react-csv';
 import GetService from '../../../utils/getService';
 
-var getEntries = new GetService('api/entries/');
-var verifyService = new GetService('/api/verify');
+var getEntries = new GetService('/api/entries/');
+var verifyService = new GetService('/api/verify/');
 
 var Export = React.createClass({
     getInitialState: function () {

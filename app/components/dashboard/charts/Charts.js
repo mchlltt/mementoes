@@ -2,7 +2,7 @@ import React from 'react';
 import {Jumbotron} from 'react-bootstrap';
 
 import GetService from '../../../utils/getService';
-var verifyService = new GetService('api/verify/');
+var verifyService = new GetService('/api/verify/');
 
 var Charts = React.createClass({
     getInitialState: function () {
