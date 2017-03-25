@@ -11,7 +11,7 @@ const DeleteModal = React.createClass({
     handleDelete() {
         deleteUser.delete([this.props.googleId]);
         logOut.get();
-        hashHistory.push({pathname: '/logged-out', state: {auth: false}});
+        hashHistory.push('/logged-out');
     },
     render() {
         return (

@@ -5,12 +5,6 @@ import {hashHistory} from 'react-router';
 import DatePicker from 'react-datepicker';
 import TagsInput from 'react-tagsinput';
 import moment from 'moment';
-import 'react-datepicker/dist/react-datepicker.css';
-import 'react-tagsinput/react-tagsinput.css';
-import '../../../styles/datepicker.css';
-import '../../../styles/animate.css';
-import '../../../styles/toastr.min.css';
-import '../../../styles/tags-input.css';
 import PutService from '../../../utils/putService';
 import PostService from '../../../utils/postService';
 import DeleteService from '../../../utils/deleteService';
@@ -155,6 +149,7 @@ var EntryForm = React.createClass({
                         id='entry'
                         value={this.state.entry}
                         rows='5'
+                        className='form-control'
                         placeholder='Your entry'
                         onChange={this.handleTextChange}
                         required={true}
@@ -163,19 +158,19 @@ var EntryForm = React.createClass({
                         id='tags'
                         value={this.state.tags}
                         onChange={this.handleChange}
-                        inputProps={{placeholder: 'Hit enter to add a tag.'}}
+                        inputProps={{placeholder: 'Hit enter to add a tag'}}
                         onlyUnique
                     />
                     {this.props.entryId &&
                         <div>
-                            <Button bsStyle='success' type='submit'>Save</Button>
-                            <Button bsStyle='danger' onClick={this.handleDelete}>Delete</Button>
+                            <Button bsStyle='success' type='submit' className='buttons'>Save</Button>
+                            <Button bsStyle='danger' onClick={this.handleDelete} className='right-button buttons'>Delete</Button>
                         </div>
                     }
                     {!this.props.entryId &&
                         <div>
-                            <Button bsStyle='success' type='submit'>Submit</Button>
-                            <Button bsStyle='danger' onClick={this.handleReset}>Reset</Button>
+                            <Button bsStyle='success' type='submit' className='buttons'>Submit</Button>
+                            <Button bsStyle='danger' onClick={this.handleReset} className='right-button buttons'>Reset</Button>
                         </div>
                     }
                 </form>

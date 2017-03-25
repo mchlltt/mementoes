@@ -1,0 +1,43 @@
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-logo {
+    height: auto;
+    width: 400px;
+    margin-bottom: 20px;
+}
+
+.sidebar-logo {
+    width: 90%;
+    height: auto;
+    margin: 20px 0;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+.right-button {
+    margin-left: 5px;
+}
+
+.buttons {
+    margin-top: 10px;
+}
+
+.login-button {
+    width: 300px;
+}
+
+.react-tagsinput-input {
+    width: 200px;
+}
+
+@media only screen and (max-width: 640px) {
+    .main-logo {
+        width: 80%;
+    }
+}

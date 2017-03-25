@@ -48,7 +48,6 @@ var Calendar = React.createClass({
             <div key="/dashboard/calendar">
                 <h2>Calendar</h2>
                 <Jumbotron>
-                    <h2>Memento Calendar</h2>
                     <CalendarWidget style={this.styles.calendar} events={this.state.events} />
                 </Jumbotron>
             </div>

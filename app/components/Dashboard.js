@@ -37,7 +37,7 @@ var Dashboard = React.createClass({
                                 <img src={'assets/images/logo.png'} className='sidebar-logo'/>
                                 <br />
                                 <a href='/api/logout'
-                                   className='btn btn-white btn-outline btn-rounded btn-sm'>Logout</a>
+                                   className='btn btn-white btn-outline btn-rounded'>Logout</a>
                             </div>
 
                             <ul className='nav nav-sidebar'>

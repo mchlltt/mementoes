@@ -25,6 +25,7 @@ var Export = React.createClass({
     render: function () {
         return (
             <CSVLink data={this.state.data}
+                     style={{'marginBottom': '10px'}}
                      filename={"mementoes_export.csv"}
                      className="btn btn-primary"
                      target="_blank">

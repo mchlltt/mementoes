@@ -3,6 +3,15 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Dashboard from './Dashboard';
 import Login from './Login';
 
+import 'react-datepicker/dist/react-datepicker.css';
+import 'react-tagsinput/react-tagsinput.css';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import '../styles/calendar.css';
+import '../styles/datepicker.css';
+import '../styles/animate.css';
+import '../styles/toastr.min.css';
+import '../styles/mementoes.css';
+
 import GetService from '../utils/getService';
 var verifyService = new GetService('/api/verify/');
 

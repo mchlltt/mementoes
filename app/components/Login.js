@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/login.css';
 
 var Login = React.createClass({
 
@@ -10,7 +9,7 @@ var Login = React.createClass({
                     <div className="col-xs-12">
                         <img src={'assets/images/logo.png'} className="main-logo center-block"/>
                         <a type="button"
-                           className="btn btn-white btn-outline btn-lg btn-rounded"
+                           className="btn btn-white btn-outline btn-lg btn-rounded login-button"
                            href="/auth/google">Sign Up/In with Google</a>
                     </div>
                 </div>
