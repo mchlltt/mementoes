@@ -1,5 +1,6 @@
 import React from 'react';
 import {Jumbotron} from 'react-bootstrap';
+import BarChart from './BarChart';
 
 import GetService from '../../../utils/getService';
 var verifyService = new GetService('/api/verify/');
@@ -21,7 +22,7 @@ var Charts = React.createClass({
                 <h2>Charts</h2>
 
                 <Jumbotron>
-                    <h2>Add Charts here</h2>
+                    <BarChart/>
                 </Jumbotron>
             </div>
 

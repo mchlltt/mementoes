@@ -3,3 +3,15 @@
     align-items: center;
     justify-content: center;
 }
+
+.main-logo {
+    height: auto;
+    width: 400px;
+    margin-bottom: 20px;
+}
+
+.sidebar-logo {
+    width: 90%;
+    height: auto;
+    margin: 20px 0;
+}

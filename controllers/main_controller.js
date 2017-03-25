@@ -93,7 +93,7 @@ router.put('/api/entries', function(req, res) {
             res.json(data);
         });
     } else {
-        res.json('An error occurred. Put body:' + JSON.stringify(req.body, null, 2));
+        res.json('An error occurred. Put body:' + req.body.id + JSON.stringify(req.body, null, 2));
     }
 });
 
