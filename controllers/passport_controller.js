@@ -46,7 +46,7 @@ router.get('/api/verify', function (req, res) {
 router.get('/api/logout', function (req, res) {
     module.exports.loggedIn = false;
     req.logout();
-    res.redirect('/');
+    res.redirect('/#/logged-out');
 });
 
 module.exports = router;

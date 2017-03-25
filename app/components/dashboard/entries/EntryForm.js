@@ -1,35 +1,36 @@
 import React from 'react';
 import {Button, FormControl} from 'react-bootstrap';
+import {ToastContainer, ToastMessage} from 'react-toastr';
+import {hashHistory} from 'react-router';
 import DatePicker from 'react-datepicker';
 import TagsInput from 'react-tagsinput';
-
 import moment from 'moment';
-import {ToastContainer, ToastMessage} from 'react-toastr';
-
-window.jQuery = require('jquery');
-
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-tagsinput/react-tagsinput.css';
 import '../../../styles/datepicker.css';
 import '../../../styles/animate.css';
 import '../../../styles/toastr.min.css';
 import '../../../styles/tags-input.css';
-
 import PutService from '../../../utils/putService';
 import PostService from '../../../utils/postService';
 import DeleteService from '../../../utils/deleteService';
 import GetService from '../../../utils/getService';
+
+window.jQuery = require('jquery');
+var ToastMessageFactory = React.createFactory(ToastMessage.jQuery);
 
 var postEntry = new PostService('/api/entries/');
 var putEntry = new PutService('/api/entries/');
 var deleteEntry = new DeleteService('/api/entries/');
 var getEntries = new GetService('/api/entries/');
 
-var ToastMessageFactory = React.createFactory(ToastMessage.jQuery);
-
 var EntryForm = React.createClass({
     addAlert: function(message) {
         this.refs.container.success(message);
+        setTimeout(this.closeAlert, 2000);
+    },
+    closeAlert: function() {
+        this.refs.container.clear();
     },
     getInitialState: function() {
         return {
@@ -53,7 +54,6 @@ var EntryForm = React.createClass({
                     entry: entry,
                     date: date,
                     tags: tags
-
                 });
 
                 this.handleDateChange(date);
@@ -62,7 +62,7 @@ var EntryForm = React.createClass({
         }
     },
     componentWillUnmount: function () {
-        this.refs.container.clear();
+        this.closeAlert();
     },
     handleReset: function(e) {
         e.preventDefault();
@@ -89,6 +89,7 @@ var EntryForm = React.createClass({
                 date: date
             });
             this.addAlert('Edit saved!');
+            setTimeout(hashHistory.goBack, 2000);
         } else {
             postEntry.post({
                 googleId: this.props.googleId,
@@ -129,9 +130,9 @@ var EntryForm = React.createClass({
         this.setState({tags})
     },
     handleDelete: function() {
-        deleteEntry.delete([this.props.googleId, this.props.entryId]).then(function() {
-            this.addAlert('Entry deleted!');
-        }.bind(this));
+        deleteEntry.delete([this.props.googleId, this.props.entryId]);
+        this.addAlert('Entry deleted!');
+        setTimeout(hashHistory.goBack, 2000);
     },
     render: function() {
         return (

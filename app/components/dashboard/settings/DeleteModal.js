@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, FormControl, Modal} from 'react-bootstrap';
+import {hashHistory} from 'react-router';
 import DeleteService from '../../../utils/deleteService';
 import GetService from '../../../utils/getService';
 
@@ -10,6 +11,7 @@ const DeleteModal = React.createClass({
     handleDelete() {
         deleteUser.delete([this.props.googleId]);
         logOut.get();
+        hashHistory.push({pathname: '/logged-out', state: {auth: false}});
     },
     render() {
         return (

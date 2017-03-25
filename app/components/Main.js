@@ -28,6 +28,8 @@ var Main = React.createClass({
         else
             change = pathname;
 
+        let showDash = this.state.auth && pathname !== '/logged-out';
+
         return (
             <div className='ui-view'>
                 <div className='ui-base'>
@@ -38,11 +40,11 @@ var Main = React.createClass({
                     >
                         {React.cloneElement(
                             <div className='ui-view'>
-                                {this.state.auth &&
-                                <Dashboard location={pathname} googleId={this.state.googleId}/>
+                                {showDash &&
+                                    <Dashboard location={pathname} googleId={this.state.googleId}/>
                                 }
-                                {!this.state.auth &&
-                                <Login />
+                                {!showDash &&
+                                    <Login />
                                 }
                             </div> || <div />, { key: change })}
                     </ReactCSSTransitionGroup>}

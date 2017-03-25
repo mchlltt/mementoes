@@ -107,6 +107,7 @@ router.delete('/api/entries/:googleId/:entryId', function(req, res) {
         function (entry) {
             if (entry.googleId === googleId) {
                 entry.destroy();
+                res.json(true);
             } else {
                 res.json('Permission denied.');
             }
