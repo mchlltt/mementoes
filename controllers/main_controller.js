@@ -32,6 +32,24 @@ router.post('/api/entries', function (req, res) {
     }
 });
 
+// Get one random entry by googleId.
+router.get('/api/entries/random/:googleId', function (req, res) {
+    var googleId = req.params.googleId;
+
+    db.sequelize.query(
+        'SELECT Entries.id ' +
+        'FROM Entries ' +
+        'WHERE Entries.googleId = :googleId ' +
+        'ORDER BY RAND() ' +
+        'LIMIT 1',
+        {replacements: {googleId}, type: db.sequelize.QueryTypes.SELECT}
+    ).then(function(entry) {
+        db.Entry.findById(entry[0].id, {include: [db.Entry.tagAssociation]}).then(function(result) {
+            res.json(result);
+        });
+    });
+});
+
 // Get entries by googleId.
 router.get('/api/entries/:googleId/:entryId?', function (req, res) {
     var googleId = req.params.googleId;

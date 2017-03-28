@@ -82,7 +82,7 @@ var EntryForm = React.createClass({
                 tags: tags,
                 date: date
             });
-            this.addAlert('Edit saved!');
+            this.addAlert('Memento edit saved!');
             setTimeout(hashHistory.goBack, 2000);
         } else {
             postEntry.post({
@@ -98,7 +98,7 @@ var EntryForm = React.createClass({
                 tags: []
             });
 
-            this.addAlert('Posted!');
+            this.addAlert('New memento added!');
         }
     },
     handleTextChange: function(event) {
@@ -125,7 +125,7 @@ var EntryForm = React.createClass({
     },
     handleDelete: function() {
         deleteEntry.delete([this.props.googleId, this.props.entryId]);
-        this.addAlert('Entry deleted!');
+        this.addAlert('Memento deleted!');
         setTimeout(hashHistory.goBack, 2000);
     },
     render: function() {

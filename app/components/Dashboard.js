@@ -49,10 +49,10 @@ var Dashboard = React.createClass({
                                     <Link to ='/dashboard/home'>Home</Link>
                                 </li>
                                 <li>
-                                    <Link to ='/dashboard/calendar'>Calendar</Link>
+                                    <Link to ='/dashboard/new'>New Memento</Link>
                                 </li>
                                 <li>
-                                    <Link to ='/dashboard/new'>New Entry</Link>
+                                    <Link to ='/dashboard/calendar'>Calendar View</Link>
                                 </li>
                                 <li>
                                     <Link to ='/dashboard/settings'>Settings</Link>
@@ -73,8 +73,8 @@ var Dashboard = React.createClass({
                                         pullRight
                                     >
                                         <MenuItem href="/#/dashboard/home">Home</MenuItem>
-                                        <MenuItem href="/#/dashboard/calendar">Calendar</MenuItem>
-                                        <MenuItem href="/#/dashboard/new">New Entry</MenuItem>
+                                        <MenuItem href="/#/dashboard/new">New Memento</MenuItem>
+                                        <MenuItem href="/#/dashboard/calendar">Calendar View</MenuItem>
                                         <MenuItem href="/#/dashboard/settings">Settings</MenuItem>
                                     </NavDropdown>
                                     </Nav>

@@ -1,7 +1,7 @@
 import React from 'react';
 import GetService from '../../../utils/getService';
 import Entry from './Entry';
-import {Accordion, Panel, Jumbotron} from 'react-bootstrap';
+import {Panel, Jumbotron} from 'react-bootstrap';
 var getTaggedEntries = new GetService('/api/tags/');
 var verifyService = new GetService('/api/verify/');
 
@@ -41,17 +41,20 @@ var TagView = React.createClass({
                 <a href="#/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</a>
                 <h2>Entries tagged with '{this.props.params[3]}'</h2>
                 <Jumbotron>
-                <Accordion>
                 {this.state.entries &&
                     this.state.entries.map(function(entry, i) {
                         return (
-                            <Panel header={entry.title} eventKey={i} key={i}>
+                            <Panel
+                                header={entry.title}
+                                bsStyle='primary'
+                                key={i}
+                                footer={<a href={'#/dashboard/users/' + entry.googleId + '/entries/' + entry.id + '/edit'}>Edit</a>}
+                            >
                                 <Entry entry={entry}/>
                             </Panel>
                         )
                     })
                 }
-                </Accordion>
                 </Jumbotron>
             </div>
         )

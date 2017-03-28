@@ -45,6 +45,31 @@
     color: white
 }
 
+.panel-heading {
+    font-size: 18px;
+}
+
+.tags {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.tag {
+    margin-right: 4px;
+}
+
+.plain-link,
+.plain-link:hover {
+    color: inherit;
+}
+
+.panel .plain-link,
+.panel .plain-link:hover{
+    color: #3ca2e0;
+}
+
 @media only screen and (max-width: 640px) {
     .main-logo {
         width: 80%;

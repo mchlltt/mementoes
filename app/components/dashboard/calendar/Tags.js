@@ -11,13 +11,13 @@ var Tags = React.createClass({
         return(
             <div>
             {this.props.tags.length > 0 &&
-            <div><span>tags: </span>
+            <span className='tags'>Tags:&nbsp;
                 {this.props.tags.map(function(tag, i) {
                     return (
                         <Tag key={i} text={tag} url={tagToURL(tag)}/>
                     );
                 })}
-            </div>
+            </span>
             }
             </div>
         )
