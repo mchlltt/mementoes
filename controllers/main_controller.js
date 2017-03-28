@@ -51,6 +51,16 @@ router.get('/api/entries/:googleId/:entryId?', function (req, res) {
     }
 });
 
+router.get('/api/tags/:googleId/:tagText', function(req, res) {
+    var googleId = req.params.googleId;
+    var tagText = req.params.tagText;
+
+    db.Tag.findAll({where: {text: tagText}}).then(function(tag) {
+        res.json(tag);
+
+    });
+});
+
 // Update an entry by entryId. Verifies permission on googleId.
 router.put('/api/entries', function(req, res) {
     var googleId = req.body.googleId;

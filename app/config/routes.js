@@ -23,7 +23,7 @@ var Dashboard = require('../components/Dashboard');
 var Login = require('../components/Login');
 var Calendar = require('../components/dashboard/calendar/Calendar');
 var New = require('../components/dashboard/entries/New');
-var Charts = require('../components/dashboard/charts/Charts');
+var History = require('../components/dashboard/history/History');
 var Settings = require('../components/dashboard/settings/Settings');
 var Edit = require('../components/dashboard/entries/Edit');
 
@@ -35,7 +35,7 @@ module.exports = (
         <Route path="/" component={Main}>
             <Route path="dashboard" component={Dashboard}>
                 <Route path="calendar" component={Calendar} />
-                <Route path="charts" component={Charts} />
+                <Route path="history" component={History} />
                 <Route path="new" component={New} />
                 <Route path="users/:googleId/entries/:entryId/edit" component={Edit} />
                 <Route path="settings" component={Settings} />

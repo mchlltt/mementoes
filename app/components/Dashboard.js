@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
+import {Navbar, Nav, NavDropdown, MenuItem} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import $ from 'jquery';
 import New from './dashboard/entries/New';
-import Charts from './dashboard/charts/Charts';
+import History from './dashboard/history/History';
 import Edit from './dashboard/entries/Edit';
 import CalendarComponent from './dashboard/calendar/Calendar';
 import Settings from './dashboard/settings/Settings';
@@ -34,10 +35,12 @@ var Dashboard = React.createClass({
                     <div className='row'>
                         <div className='col-sm-3 col-md-2 sidebar'>
                             <div className='text-center'>
-                                <img src={'assets/images/logo.png'} className='sidebar-logo'/>
+                                <a href='/#/dashboard/calendar'>
+                                    <img src={'assets/images/logo.png'} className='sidebar-logo'/>
+                                </a>
                                 <br />
                                 <a href='/api/logout'
-                                   className='btn btn-white btn-outline btn-rounded'>Logout</a>
+                                   className='btn btn-white btn-outline btn-rounded'>Log Out</a>
                             </div>
 
                             <ul className='nav nav-sidebar'>
@@ -48,12 +51,34 @@ var Dashboard = React.createClass({
                                     <Link to ='/dashboard/new'>New Entry</Link>
                                 </li>
                                 <li>
-                                    <Link to ='/dashboard/charts'>Charts</Link>
+                                    <Link to ='/dashboard/history'>History</Link>
                                 </li>
                                 <li>
                                     <Link to ='/dashboard/settings'>Settings</Link>
                                 </li>
                             </ul>
+                        </div>
+
+                        <div className="col-xs-12 xs-only">
+                            <Navbar.Header>
+                                <Nav>
+                                    <Navbar.Brand>
+                                        <Link to='/dashboard/calendar'>Mementoes</Link>
+                                    </Navbar.Brand>
+                                    <Nav pullRight>
+                                    <NavDropdown
+                                        title="Menu"
+                                        id="basic-nav-dropdown"
+                                        pullRight
+                                    >
+                                        <MenuItem href="/#/dashboard/calendar">Calendar</MenuItem>
+                                        <MenuItem href="/#/dashboard/new">New Entry</MenuItem>
+                                        <MenuItem href="/#/dashboard/history">History</MenuItem>
+                                        <MenuItem href="/#/dashboard/settings">Settings</MenuItem>
+                                    </NavDropdown>
+                                    </Nav>
+                                </Nav>
+                            </Navbar.Header>
                         </div>
 
                         <ReactCSSTransitionGroup component='div'
@@ -72,8 +97,8 @@ var Dashboard = React.createClass({
                                     {pathname.indexOf('edit') !== -1 &&
                                     <Edit params={pathname}/>
                                     }
-                                    {pathname.indexOf('charts') !== -1 &&
-                                    <Charts/>
+                                    {pathname.indexOf('history') !== -1 &&
+                                    <History/>
                                     }
                                     {pathname.indexOf('settings') !== -1 &&
                                     <Settings/>

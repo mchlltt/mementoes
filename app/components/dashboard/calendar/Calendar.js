@@ -1,9 +1,7 @@
 import React from 'react';
 import {Jumbotron} from 'react-bootstrap';
 import CalendarWidget from './CalendarWidget';
-
 import GetService from '../../../utils/getService';
-
 var getEntries = new GetService('/api/entries/');
 var verifyService = new GetService('/api/verify/');
 
