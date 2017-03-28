@@ -1,11 +1,12 @@
 var React = require('react');
+import {Link} from 'react-router';
 
 var Tag = React.createClass({
     render: function render() {
         return(
-            <a href={'/dashboard/tags/' + this.props.url} className="plain-link tag">
+            <Link to={this.props.url} className="plain-link tag">
                 {this.props.text}
-            </a>
+            </Link>
         )
     }
 });

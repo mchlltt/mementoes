@@ -1,4 +1,5 @@
 var React = require('react');
+import {Link} from 'react-router';
 
 var Tags = require('./Tags');
 
@@ -6,9 +7,9 @@ var Event = React.createClass({
     render: function render() {
         return(
             <div>
-                <a href={'/dashboard/users/' + this.props.event.googleId + '/entries/' + this.props.event.id + '/edit/'} className="plain-link">
+                <Link to={'/dashboard/users/' + this.props.event.googleId + '/entries/' + this.props.event.id + '/edit/'} className="plain-link">
                     <span><strong>{this.props.title}</strong></span>
-                </a>
+                </Link>
                 <br />
                 <span>
                     {this.props.event.tags &&

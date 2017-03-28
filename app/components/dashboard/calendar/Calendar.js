@@ -1,5 +1,6 @@
 import React from 'react';
 import {Jumbotron} from 'react-bootstrap';
+import {Link} from 'react-router';
 import CalendarWidget from './CalendarWidget';
 import GetService from '../../../utils/getService';
 var getEntries = new GetService('/api/entries/');
@@ -47,7 +48,7 @@ var Calendar = React.createClass({
     render: function () {
         return (
             <div key="/dashboard/calendar">
-                <a href="/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</a>
+                <Link to="/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</Link>
                 <h2>Calendar</h2>
                 <Jumbotron>
                     {this.state.loaded &&

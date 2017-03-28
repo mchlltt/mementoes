@@ -1,5 +1,5 @@
 import React from 'react';
-import {hashHistory} from 'react-router';
+import {browserHistory, Link} from 'react-router';
 import {Jumbotron, Panel, Button} from 'react-bootstrap';
 import moment from 'moment';
 import CustomTagCloud from './CustomTagCloud';
@@ -47,7 +47,7 @@ var Home = React.createClass({
         }.bind(this));
     },
     handleTagClick: function (tag) {
-        hashHistory.push(`/dashboard/tags/${tag.value}`);
+        browserHistory.push(`/dashboard/tags/${tag.value}`);
     },
     handleRefresh: function () {
         this.getEntry(this.state.googleId).then(function (entry) {
@@ -72,7 +72,7 @@ var Home = React.createClass({
                         <Panel
                             header={this.state.randomEntry.text}
                             bsStyle='primary'
-                            footer={<a href={'/dashboard/users/' + this.state.googleId + '/entries/' + this.state.randomEntry.id + '/edit'}>Edit</a>}
+                            footer={<Link to={'/dashboard/users/' + this.state.googleId + '/entries/' + this.state.randomEntry.id + '/edit'}>Edit</Link>}
                         >
                             <Entry entry={this.state.randomEntry}/>
                         </Panel>

@@ -1,24 +1,25 @@
 import React from 'react';
 import GetService from '../../../utils/getService';
 import Entry from './Entry';
+import {Link} from 'react-router';
 import {Panel, Jumbotron} from 'react-bootstrap';
 var getTaggedEntries = new GetService('/api/tags/');
 var verifyService = new GetService('/api/verify/');
 
 var TagView = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {};
     },
-    componentWillMount: function() {
-        verifyService.get().then(function(res) {
-            getTaggedEntries.get([res.googleId, this.props.params[3]]).then(function(response) {
+    componentWillMount: function () {
+        verifyService.get().then(function (res) {
+            getTaggedEntries.get([res.googleId, this.props.params[3]]).then(function (response) {
                 var entries = [];
 
-                response.forEach(function(entry) {
+                response.forEach(function (entry) {
                     var tags = [];
 
                     if (entry.entryHasTags) {
-                        entry.entryHasTags.forEach(function(tag) {
+                        entry.entryHasTags.forEach(function (tag) {
                             tags.push(tag.text);
                         });
                     }
@@ -31,30 +32,30 @@ var TagView = React.createClass({
                         tags: tags
                     });
                 });
-                this.setState({ entries });
+                this.setState({entries});
             }.bind(this));
         }.bind(this));
     },
     render: function () {
         return (
             <div key="/dashboard/tags">
-                <a href="/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</a>
-                <h2>Entries tagged with '{this.props.params[3]}'</h2>
+                <Link to="/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</Link>
+                <h2>Entries tagged with '{decodeURIComponent(this.props.params[3])}'</h2>
                 <Jumbotron>
-                {this.state.entries &&
-                    this.state.entries.map(function(entry, i) {
+                    {this.state.entries &&
+                    this.state.entries.map(function (entry, i) {
                         return (
                             <Panel
                                 header={entry.title}
                                 bsStyle='primary'
                                 key={i}
-                                footer={<a href={'/dashboard/users/' + entry.googleId + '/entries/' + entry.id + '/edit'}>Edit</a>}
+                                footer={<Link to={'/dashboard/users/' + entry.googleId + '/entries/' + entry.id + '/edit'}>Edit</Link>}
                             >
                                 <Entry entry={entry}/>
                             </Panel>
                         )
                     })
-                }
+                    }
                 </Jumbotron>
             </div>
         )

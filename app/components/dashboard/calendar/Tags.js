@@ -5,7 +5,7 @@ var Tag = require('./Tag');
 var Tags = React.createClass({
     render: function render() {
         function tagToURL(tag) {
-            return tag.replace(/[^a-zA-Z0-9-_]/g, '-').toLowerCase() + '/';
+            return '/dashboard/tags/' + tag.toLowerCase();
         }
 
         return(

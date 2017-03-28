@@ -1,5 +1,6 @@
 import React from 'react';
 import {Jumbotron} from 'react-bootstrap';
+import {Link} from 'react-router';
 import Export from './Export';
 import Delete from './Delete';
 
@@ -18,7 +19,7 @@ var Settings = React.createClass({
     render: function() {
         return (
             <div key="settings">
-                <a href="/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</a>
+                <Link to="/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</Link>
                 <h2>Settings</h2>
                 <Jumbotron>
                     <Export googleId={this.state.googleId}/>
