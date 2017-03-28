@@ -1,6 +1,7 @@
 // Import dependencies.
 var express = require('express');
 var db = require('../models');
+var path = require('path');
 
 // Initialize express router.
 var router = express.Router();
@@ -157,7 +158,6 @@ router.put('/api/entries', function(req, res) {
     }
 });
 
-
 // Delete an entry by entryId. Verifies permission on googleId.
 router.delete('/api/entries/:googleId/:entryId', function(req, res) {
     var googleId = req.params.googleId;
@@ -175,7 +175,7 @@ router.delete('/api/entries/:googleId/:entryId', function(req, res) {
     );
 });
 
-// Delete user by googleId. Works but only kind of.
+// Delete user by googleId.
 router.delete('/api/users/:googleId', function(req, res) {
     var googleId = req.params.googleId;
 
@@ -188,10 +188,9 @@ router.delete('/api/users/:googleId', function(req, res) {
     );
 });
 
-
 // Default route.
 router.use('*', function (req, res) {
-    res.sendFile('index.html');
+    res.sendFile('index.html', {root: path.resolve(__dirname, '../public')});
 });
 
 // Export routes.

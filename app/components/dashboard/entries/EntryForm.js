@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, FormControl} from 'react-bootstrap';
 import {ToastContainer, ToastMessage} from 'react-toastr';
-import {hashHistory} from 'react-router';
+import {browserHistory} from 'react-router';
 import DatePicker from 'react-datepicker';
 import TagsInput from 'react-tagsinput';
 import moment from 'moment';
@@ -83,7 +83,7 @@ var EntryForm = React.createClass({
                 date: date
             });
             this.addAlert('Memento edit saved!');
-            setTimeout(hashHistory.goBack, 2000);
+            setTimeout(browserHistory.goBack, 2000);
         } else {
             postEntry.post({
                 googleId: this.props.googleId,
@@ -126,7 +126,7 @@ var EntryForm = React.createClass({
     handleDelete: function() {
         deleteEntry.delete([this.props.googleId, this.props.entryId]);
         this.addAlert('Memento deleted!');
-        setTimeout(hashHistory.goBack, 2000);
+        setTimeout(browserHistory.goBack, 2000);
     },
     render: function() {
         return (

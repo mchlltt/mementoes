@@ -38,7 +38,7 @@ var TagView = React.createClass({
     render: function () {
         return (
             <div key="/dashboard/tags">
-                <a href="#/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</a>
+                <a href="/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</a>
                 <h2>Entries tagged with '{this.props.params[3]}'</h2>
                 <Jumbotron>
                 {this.state.entries &&
@@ -48,7 +48,7 @@ var TagView = React.createClass({
                                 header={entry.title}
                                 bsStyle='primary'
                                 key={i}
-                                footer={<a href={'#/dashboard/users/' + entry.googleId + '/entries/' + entry.id + '/edit'}>Edit</a>}
+                                footer={<a href={'/dashboard/users/' + entry.googleId + '/entries/' + entry.id + '/edit'}>Edit</a>}
                             >
                                 <Entry entry={entry}/>
                             </Panel>

@@ -36,8 +36,8 @@ var Dashboard = React.createClass({
                     <div className='row'>
                         <div className='col-sm-3 col-md-2 sidebar'>
                             <div className='text-center'>
-                                <a href='/#/dashboard/calendar'>
-                                    <img src={'assets/images/logo.png'} className='sidebar-logo'/>
+                                <a href='/dashboard/home'>
+                                    <img src={'/assets/images/logo.png'} className='sidebar-logo'/>
                                 </a>
                                 <br />
                                 <a href='/api/logout'
@@ -48,11 +48,11 @@ var Dashboard = React.createClass({
                                 <li>
                                     <Link to ='/dashboard/home'>Home</Link>
                                 </li>
+                                {/*<li>*/}
+                                    {/*<Link to ='/dashboard/new'>New Memento</Link>*/}
+                                {/*</li>*/}
                                 <li>
-                                    <Link to ='/dashboard/new'>New Memento</Link>
-                                </li>
-                                <li>
-                                    <Link to ='/dashboard/calendar'>Calendar View</Link>
+                                    <Link to ='/dashboard/calendar'>Calendar</Link>
                                 </li>
                                 <li>
                                     <Link to ='/dashboard/settings'>Settings</Link>
@@ -72,10 +72,10 @@ var Dashboard = React.createClass({
                                         id="basic-nav-dropdown"
                                         pullRight
                                     >
-                                        <MenuItem href="/#/dashboard/home">Home</MenuItem>
-                                        <MenuItem href="/#/dashboard/new">New Memento</MenuItem>
-                                        <MenuItem href="/#/dashboard/calendar">Calendar View</MenuItem>
-                                        <MenuItem href="/#/dashboard/settings">Settings</MenuItem>
+                                        <MenuItem href="/dashboard/home">Home</MenuItem>
+                                        {/*<MenuItem href="/dashboard/new">New Memento</MenuItem>*/}
+                                        <MenuItem href="/dashboard/calendar">Calendar</MenuItem>
+                                        <MenuItem href="/dashboard/settings">Settings</MenuItem>
                                     </NavDropdown>
                                     </Nav>
                                 </Nav>

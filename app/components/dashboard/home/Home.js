@@ -72,7 +72,7 @@ var Home = React.createClass({
                         <Panel
                             header={this.state.randomEntry.text}
                             bsStyle='primary'
-                            footer={<a href={'#/dashboard/users/' + this.state.googleId + '/entries/' + this.state.randomEntry.id + '/edit'}>Edit</a>}
+                            footer={<a href={'/dashboard/users/' + this.state.googleId + '/entries/' + this.state.randomEntry.id + '/edit'}>Edit</a>}
                         >
                             <Entry entry={this.state.randomEntry}/>
                         </Panel>

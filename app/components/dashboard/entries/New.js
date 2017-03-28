@@ -25,7 +25,7 @@ var New = React.createClass({
     render: function () {
         return (
             <div key="/dashboard/new">
-                <a href="#/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</a>
+                <a href="/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</a>
                 <h2>New Memento</h2>
                 <Jumbotron>
                     <h2>What is something that made you happy {this.state.dateDisplay}?</h2>

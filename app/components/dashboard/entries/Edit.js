@@ -26,7 +26,7 @@ var Edit = React.createClass({
     render: function () {
         return (
             <div key="/dashboard/new">
-                <a href="#/dashboard/calendar" className="pull-right btn btn-primary btn-outline btn-rounded">Back to
+                <a href="/dashboard/calendar" className="pull-right btn btn-primary btn-outline btn-rounded">Back to
                     Calendar</a>
                 <h2>Edit Post</h2>
                 <Jumbotron>

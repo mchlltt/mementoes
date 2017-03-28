@@ -13,7 +13,7 @@ router.get('/auth/google',
 // GET /auth/google/callback
 router.get('/auth/google/callback',
     passport.authenticate('google', {
-        failureRedirect: '/#/login'
+        failureRedirect: '/login'
     }),
     function (req, res) {
         //change to true when logged in
@@ -25,7 +25,7 @@ router.get('/auth/google/callback',
                 googleId: req.user.id
             }
         }).spread(function () {
-            res.redirect('/#/dashboard/home');
+            res.redirect('/dashboard/home');
         });
     });
 
@@ -46,7 +46,7 @@ router.get('/api/verify', function (req, res) {
 router.get('/api/logout', function (req, res) {
     module.exports.loggedIn = false;
     req.logout();
-    res.redirect('/#/logged-out');
+    res.redirect('/logged-out');
 });
 
 module.exports = router;
