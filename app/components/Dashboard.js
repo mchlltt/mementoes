@@ -5,6 +5,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import $ from 'jquery';
 import New from './dashboard/entries/New';
 import Home from './dashboard/home/Home';
+import TagView from './dashboard/home/TagView';
 import Edit from './dashboard/entries/Edit';
 import CalendarComponent from './dashboard/calendar/Calendar';
 import Settings from './dashboard/settings/Settings';
@@ -96,6 +97,9 @@ var Dashboard = React.createClass({
                                     }
                                     {pathname.indexOf('edit') !== -1 &&
                                     <Edit params={pathname}/>
+                                    }
+                                    {pathname.indexOf('tags') !== -1 &&
+                                    <TagView params={pathname}/>
                                     }
                                     {pathname.indexOf('home') !== -1 &&
                                     <Home/>

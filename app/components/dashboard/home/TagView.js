@@ -1,7 +1,7 @@
 import React from 'react';
 import GetService from '../../../utils/getService';
 import Entry from './Entry';
-import {Accordion, Panel} from 'react-bootstrap';
+import {Accordion, Panel, Jumbotron} from 'react-bootstrap';
 var getTaggedEntries = new GetService('/api/tags/');
 var verifyService = new GetService('/api/verify/');
 
@@ -11,7 +11,7 @@ var TagView = React.createClass({
     },
     componentWillMount: function() {
         verifyService.get().then(function(res) {
-            getTaggedEntries.get([res.googleId, this.props.text]).then(function(response) {
+            getTaggedEntries.get([res.googleId, this.props.params[3]]).then(function(response) {
                 var entries = [];
 
                 response.forEach(function(entry) {
@@ -37,7 +37,10 @@ var TagView = React.createClass({
     },
     render: function () {
         return (
-            <div>
+            <div key="/dashboard/tags">
+                <a href="#/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</a>
+                <h2>Entries tagged with '{this.props.params[3]}'</h2>
+                <Jumbotron>
                 <Accordion>
                 {this.state.entries &&
                     this.state.entries.map(function(entry, i) {
@@ -49,6 +52,7 @@ var TagView = React.createClass({
                     })
                 }
                 </Accordion>
+                </Jumbotron>
             </div>
         )
     }

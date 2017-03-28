@@ -37,7 +37,10 @@ var Calendar = React.createClass({
                         tags: tags
                     });
                 });
-                this.setState({ events: events });
+                this.setState({
+                    events: events,
+                    loaded: true
+                });
             }.bind(this));
         }.bind(this));
     },
@@ -47,7 +50,9 @@ var Calendar = React.createClass({
                 <a href="#/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</a>
                 <h2>Calendar</h2>
                 <Jumbotron>
-                    <CalendarWidget style={this.styles.calendar} events={this.state.events} />
+                    {this.state.loaded &&
+                        <CalendarWidget style={this.styles.calendar} events={this.state.events} />
+                    }
                 </Jumbotron>
             </div>
 
