@@ -20,6 +20,10 @@ var Home = React.createClass({
     handleTagClick: function(tag) {
         hashHistory.push(`/dashboard/tags/${tag.value}`);
     },
+    shouldComponentUpdate: function(nextProps, nextState) {
+        // Prevent TagCloud from rerendering on handleTagClick.
+        return this.state.data !== nextState.data;
+    },
     render: function () {
 
         return (
@@ -28,16 +32,19 @@ var Home = React.createClass({
 
                 <Jumbotron>
                     {this.state.data &&
-                        <TagCloud
-                            minSize={20}
-                            maxSize={40}
-                            colorOptions={{
-                                luminosity: 'light',
-                                hue: 'blue'
-                            }}
-                            tags={this.state.data}
-                            onClick={this.handleTagClick}
-                        />
+                        <div>
+                            <h2>Top Tags</h2>
+                            <TagCloud
+                                minSize={20}
+                                maxSize={50}
+                                colorOptions={{
+                                    luminosity: 'light',
+                                    hue: 'blue'
+                                }}
+                                tags={this.state.data}
+                                onClick={this.handleTagClick}
+                            />
+                        </div>
                     }
                 </Jumbotron>
             </div>
