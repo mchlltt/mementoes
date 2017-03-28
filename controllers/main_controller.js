@@ -51,25 +51,46 @@ router.get('/api/entries/:googleId/:entryId?', function (req, res) {
     }
 });
 
+// Get a user's tag frequency.
+router.get('/api/tags/:googleId', function(req, res) {
+    var googleId = req.params.googleId;
+
+    db.sequelize.query(
+        'SELECT Tags.text AS value, COUNT(Tags.text) AS count FROM Entries ' +
+        'JOIN EntryTag ON EntryTag.entryId = entries.id ' +
+        'JOIN Tags ON EntryTag.tagId = Tags.id ' +
+        'WHERE Entries.googleId = :googleId ' +
+        'GROUP BY Tags.text',
+        { replacements: { googleId }, type: db.sequelize.QueryTypes.SELECT }
+    ).then(function(entries) {
+        res.json(entries);
+    });
+});
+
+// Get a user's entries by tag text.
 router.get('/api/tags/:googleId/:tagText', function(req, res) {
     var googleId = req.params.googleId;
     var tagText = req.params.tagText;
 
-    db.Entry.findAll({where: {googleId: googleId}, include: [db.Entry.tagAssociation]}).then(
-        function (result) {
-            var results = [];
-            result.forEach(function(entry) {
-                if (entry.entryHasTags) {
-                    entry.entryHasTags.forEach(function(tag) {
-                        if (tag.text === tagText) {
-                            results.push(entry);
-                        }
-                    });
-                }
-            });
-            res.json(results);
-        }
-    );
+    db.sequelize.query(
+        'SELECT Entries.id ' +
+        'FROM Entries ' +
+        'JOIN EntryTag ON EntryTag.entryId = entries.id ' +
+        'JOIN Tags ON EntryTag.tagId = Tags.id ' +
+        'WHERE Entries.googleId = :googleId ' +
+        'AND Tags.text = :tagText;',
+        { replacements: { googleId, tagText }, type: db.sequelize.QueryTypes.SELECT }
+    ).then(function(entries) {
+        var entryIds = [];
+        entries.forEach(function(entry) {
+            entryIds.push(entry.id);
+        });
+        db.Entry.findAll({where: {googleId: googleId, id: {$in: entryIds}}, include: [db.Entry.tagAssociation]}).then(
+            function (result) {
+                res.json(result);
+            }
+        );
+    });
 });
 
 // Update an entry by entryId. Verifies permission on googleId.

@@ -5,7 +5,7 @@ import {Jumbotron} from 'react-bootstrap';
 import {TagCloud} from "react-tagcloud";
 import GetService from '../../../utils/getService';
 import TagView from './TagView';
-var getEntries = new GetService('/api/entries/');
+var getTags = new GetService('/api/tags/');
 var verifyService = new GetService('/api/verify/');
 
 var Home = React.createClass({
@@ -14,22 +14,8 @@ var Home = React.createClass({
     },
     componentWillMount: function() {
         verifyService.get().then(function(res) {
-            getEntries.get([res.googleId]).then(function(response) {
-                var rawTags = [];
-                response.forEach(function(event) {
-                    event.entryHasTags.forEach(function(tag) {
-                        rawTags.push(tag.text);
-                    });
-                });
-
-                var rawCounts = _.countBy(rawTags);
-
-                var data = [];
-                Object.keys(rawCounts).forEach(function(count) {
-                    data.push({value: count, count: rawCounts[count]})
-                });
-
-                this.setState({ data });
+            getTags.get([res.googleId]).then(function(response) {
+                this.setState({ data: response });
             }.bind(this));
         }.bind(this));
     },
