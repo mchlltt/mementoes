@@ -44,6 +44,7 @@ var Calendar = React.createClass({
     render: function () {
         return (
             <div key="/dashboard/calendar">
+                <a href="#/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</a>
                 <h2>Calendar</h2>
                 <Jumbotron>
                     <CalendarWidget style={this.styles.calendar} events={this.state.events} />

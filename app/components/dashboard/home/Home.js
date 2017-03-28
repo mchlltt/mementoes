@@ -8,7 +8,7 @@ import TagView from './TagView';
 var getEntries = new GetService('/api/entries/');
 var verifyService = new GetService('/api/verify/');
 
-var History = React.createClass({
+var Home = React.createClass({
     getInitialState: function() {
         return {}
     },
@@ -41,9 +41,8 @@ var History = React.createClass({
         let showCloud = this.state.data && !this.state.currentTag;
 
         return (
-            <div key="/dashboard/history">
-                <a href="#/dashboard/calendar" className="pull-right btn btn-primary btn-outline btn-rounded">Back to Calendar</a>
-                <h2>History</h2>
+            <div key="/dashboard/home">
+                <h2>Home</h2>
 
                 <Jumbotron>
                     {showCloud &&
@@ -69,4 +68,4 @@ var History = React.createClass({
 
 });
 
-module.exports = History;
+module.exports = Home;

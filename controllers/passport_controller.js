@@ -25,7 +25,7 @@ router.get('/auth/google/callback',
                 googleId: req.user.id
             }
         }).spread(function () {
-            res.redirect('/#/dashboard/calendar');
+            res.redirect('/#/dashboard/home');
         });
     });
 

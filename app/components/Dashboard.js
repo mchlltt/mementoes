@@ -4,7 +4,7 @@ import {Navbar, Nav, NavDropdown, MenuItem} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import $ from 'jquery';
 import New from './dashboard/entries/New';
-import History from './dashboard/history/History';
+import Home from './dashboard/home/Home';
 import Edit from './dashboard/entries/Edit';
 import CalendarComponent from './dashboard/calendar/Calendar';
 import Settings from './dashboard/settings/Settings';
@@ -45,13 +45,13 @@ var Dashboard = React.createClass({
 
                             <ul className='nav nav-sidebar'>
                                 <li>
+                                    <Link to ='/dashboard/home'>Home</Link>
+                                </li>
+                                <li>
                                     <Link to ='/dashboard/calendar'>Calendar</Link>
                                 </li>
                                 <li>
                                     <Link to ='/dashboard/new'>New Entry</Link>
-                                </li>
-                                <li>
-                                    <Link to ='/dashboard/history'>History</Link>
                                 </li>
                                 <li>
                                     <Link to ='/dashboard/settings'>Settings</Link>
@@ -63,7 +63,7 @@ var Dashboard = React.createClass({
                             <Navbar.Header>
                                 <Nav>
                                     <Navbar.Brand>
-                                        <Link to='/dashboard/calendar'>Mementoes</Link>
+                                        <Link to='/dashboard/home'>Mementoes</Link>
                                     </Navbar.Brand>
                                     <Nav pullRight>
                                     <NavDropdown
@@ -71,9 +71,9 @@ var Dashboard = React.createClass({
                                         id="basic-nav-dropdown"
                                         pullRight
                                     >
+                                        <MenuItem href="/#/dashboard/home">Home</MenuItem>
                                         <MenuItem href="/#/dashboard/calendar">Calendar</MenuItem>
                                         <MenuItem href="/#/dashboard/new">New Entry</MenuItem>
-                                        <MenuItem href="/#/dashboard/history">History</MenuItem>
                                         <MenuItem href="/#/dashboard/settings">Settings</MenuItem>
                                     </NavDropdown>
                                     </Nav>
@@ -97,8 +97,8 @@ var Dashboard = React.createClass({
                                     {pathname.indexOf('edit') !== -1 &&
                                     <Edit params={pathname}/>
                                     }
-                                    {pathname.indexOf('history') !== -1 &&
-                                    <History/>
+                                    {pathname.indexOf('home') !== -1 &&
+                                    <Home/>
                                     }
                                     {pathname.indexOf('settings') !== -1 &&
                                     <Settings/>

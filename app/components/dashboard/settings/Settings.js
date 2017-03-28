@@ -18,7 +18,7 @@ var Settings = React.createClass({
     render: function() {
         return (
             <div key="settings">
-                <a href="#/dashboard/calendar" className="pull-right btn btn-primary btn-outline btn-rounded">Back to Calendar</a>
+                <a href="#/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</a>
                 <h2>Settings</h2>
                 <Jumbotron>
                     <Export googleId={this.state.googleId}/>
