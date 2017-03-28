@@ -57,7 +57,7 @@ router.get('/api/tags/:googleId', function(req, res) {
 
     db.sequelize.query(
         'SELECT Tags.text AS value, COUNT(Tags.text) AS count FROM Entries ' +
-        'JOIN EntryTag ON EntryTag.entryId = entries.id ' +
+        'JOIN EntryTag ON EntryTag.entryId = Entries.id ' +
         'JOIN Tags ON EntryTag.tagId = Tags.id ' +
         'WHERE Entries.googleId = :googleId ' +
         'GROUP BY Tags.text',
@@ -75,7 +75,7 @@ router.get('/api/tags/:googleId/:tagText', function(req, res) {
     db.sequelize.query(
         'SELECT Entries.id ' +
         'FROM Entries ' +
-        'JOIN EntryTag ON EntryTag.entryId = entries.id ' +
+        'JOIN EntryTag ON EntryTag.entryId = Entries.id ' +
         'JOIN Tags ON EntryTag.tagId = Tags.id ' +
         'WHERE Entries.googleId = :googleId ' +
         'AND Tags.text = :tagText;',
