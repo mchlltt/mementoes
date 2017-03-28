@@ -55,10 +55,21 @@ router.get('/api/tags/:googleId/:tagText', function(req, res) {
     var googleId = req.params.googleId;
     var tagText = req.params.tagText;
 
-    db.Tag.findAll({where: {text: tagText}}).then(function(tag) {
-        res.json(tag);
-
-    });
+    db.Entry.findAll({where: {googleId: googleId}, include: [db.Entry.tagAssociation]}).then(
+        function (result) {
+            var results = [];
+            result.forEach(function(entry) {
+                if (entry.entryHasTags) {
+                    entry.entryHasTags.forEach(function(tag) {
+                        if (tag.text === tagText) {
+                            results.push(entry);
+                        }
+                    });
+                }
+            });
+            res.json(results);
+        }
+    );
 });
 
 // Update an entry by entryId. Verifies permission on googleId.
