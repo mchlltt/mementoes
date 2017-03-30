@@ -113,10 +113,10 @@ router.get('/api/tags/:googleId/:tagText', function(req, res) {
 });
 
 // Update an entry by entryId. Verifies permission on googleId.
-router.put('/api/entries/:tagless?', function(req, res) {
+router.put('/api/entries', function(req, res) {
     var googleId = req.body.googleId;
     var entryId = req.body.entryId;
-    var tagless = req.params.tagless || null;
+    var tagless = req.params.tagless || false;
     var date = req.body.date;
     var text = req.body.text;
     var tags = req.body.tags;

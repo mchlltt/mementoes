@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import {Navbar, Nav, NavDropdown, MenuItem} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import $ from 'jquery';
-import {LinkContainer} from 'react-router-bootstrap'
+import {LinkContainer} from 'react-router-bootstrap';
 import Home from './dashboard/home/Home';
 import TagView from './dashboard/home/TagView';
 import Edit from './dashboard/entries/Edit';
@@ -57,7 +57,7 @@ var Dashboard = React.createClass({
                             </ul>
                         </div>
 
-                        <div className="col-xs-12 xs-only">
+                        <div className='col-xs-12 xs-only'>
                             <Navbar.Header>
                                 <Nav>
                                     <Navbar.Brand>
@@ -65,17 +65,17 @@ var Dashboard = React.createClass({
                                     </Navbar.Brand>
                                     <Nav pullRight>
                                     <NavDropdown
-                                        title="Menu"
-                                        id="basic-nav-dropdown"
+                                        title='Menu'
+                                        id='basic-nav-dropdown'
                                         pullRight
                                     >
-                                        <LinkContainer to="/dashboard/home">
+                                        <LinkContainer to='/dashboard/home'>
                                             <MenuItem>Home</MenuItem>
                                         </LinkContainer>
-                                        <LinkContainer to="/dashboard/calendar">
+                                        <LinkContainer to='/dashboard/calendar'>
                                             <MenuItem>Calendar</MenuItem>
                                         </LinkContainer>
-                                        <LinkContainer to="/dashboard/settings">
+                                        <LinkContainer to='/dashboard/settings'>
                                             <MenuItem>Settings</MenuItem>
                                         </LinkContainer>
                                     </NavDropdown>
