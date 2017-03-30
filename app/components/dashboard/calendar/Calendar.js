@@ -49,6 +49,7 @@ var Calendar = React.createClass({
         return (
             <div key="/dashboard/calendar">
                 <Link to="/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</Link>
+                <Link to="/dashboard/new" className="pull-right btn btn-success btn-outline btn-rounded">New Memento</Link>
                 <h2>Calendar</h2>
                 <Jumbotron>
                     {this.state.loaded &&
@@ -56,8 +57,6 @@ var Calendar = React.createClass({
                     }
                 </Jumbotron>
             </div>
-
-
         );
     }
 

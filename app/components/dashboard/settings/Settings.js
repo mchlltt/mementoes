@@ -20,6 +20,7 @@ var Settings = React.createClass({
         return (
             <div key="settings">
                 <Link to="/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</Link>
+                <Link to="/dashboard/new" className="pull-right btn btn-success btn-outline btn-rounded">New Memento</Link>
                 <h2>Settings</h2>
                 <Jumbotron>
                     <Export googleId={this.state.googleId}/>

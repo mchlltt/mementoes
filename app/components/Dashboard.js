@@ -5,6 +5,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import $ from 'jquery';
 import {LinkContainer} from 'react-router-bootstrap';
 import Home from './dashboard/home/Home';
+import New from './dashboard/entries/New';
 import TagView from './dashboard/home/TagView';
 import Edit from './dashboard/entries/Edit';
 import CalendarComponent from './dashboard/calendar/Calendar';
@@ -32,7 +33,7 @@ var Dashboard = React.createClass({
         let pathname = location.split('/');
 
         // Add logic to allow the root to display 'Home'.
-        let showHome = pathname.indexOf('home') !== -1 || location === '/';
+        let showHome = pathname.indexOf('home') === 2 || location === '/';
 
         return (
             <div className='dashboard-page ui-view'>
@@ -95,19 +96,22 @@ var Dashboard = React.createClass({
                         >
                             {React.cloneElement(<div
                                 className='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main ng-scope ui-view'>
-                                    {pathname.indexOf('calendar') !== -1 &&
+                                    {pathname.indexOf('calendar') === 2 &&
                                     <CalendarComponent/>
                                     }
-                                    {pathname.indexOf('edit') !== -1 &&
+                                    {pathname.indexOf('edit') === 6 &&
                                     <Edit params={pathname}/>
                                     }
-                                    {pathname.indexOf('tags') !== -1 &&
+                                    {pathname.indexOf('new') === 2 &&
+                                    <New />
+                                    }
+                                    {pathname.indexOf('tags') === 2 &&
                                     <TagView params={pathname}/>
                                     }
                                     {showHome &&
                                     <Home/>
                                     }
-                                    {pathname.indexOf('settings') !== -1 &&
+                                    {pathname.indexOf('settings') === 2 &&
                                     <Settings/>
                                     }
                                 </div> || <div />, { key: pathname.join('/') })}
