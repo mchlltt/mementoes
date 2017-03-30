@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import {Navbar, Nav, NavDropdown, MenuItem} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import $ from 'jquery';
-import New from './dashboard/entries/New';
+import {LinkContainer} from 'react-router-bootstrap'
 import Home from './dashboard/home/Home';
 import TagView from './dashboard/home/TagView';
 import Edit from './dashboard/entries/Edit';
@@ -48,9 +48,6 @@ var Dashboard = React.createClass({
                                 <li>
                                     <Link to ='/dashboard/home'>Home</Link>
                                 </li>
-                                {/*<li>*/}
-                                    {/*<Link to ='/dashboard/new'>New Memento</Link>*/}
-                                {/*</li>*/}
                                 <li>
                                     <Link to ='/dashboard/calendar'>Calendar</Link>
                                 </li>
@@ -72,10 +69,15 @@ var Dashboard = React.createClass({
                                         id="basic-nav-dropdown"
                                         pullRight
                                     >
-                                        <MenuItem href="/dashboard/home">Home</MenuItem>
-                                        {/*<MenuItem href="/dashboard/new">New Memento</MenuItem>*/}
-                                        <MenuItem href="/dashboard/calendar">Calendar</MenuItem>
-                                        <MenuItem href="/dashboard/settings">Settings</MenuItem>
+                                        <LinkContainer to="/dashboard/home">
+                                            <MenuItem>Home</MenuItem>
+                                        </LinkContainer>
+                                        <LinkContainer to="/dashboard/calendar">
+                                            <MenuItem>Calendar</MenuItem>
+                                        </LinkContainer>
+                                        <LinkContainer to="/dashboard/settings">
+                                            <MenuItem>Settings</MenuItem>
+                                        </LinkContainer>
                                     </NavDropdown>
                                     </Nav>
                                 </Nav>
@@ -92,9 +94,6 @@ var Dashboard = React.createClass({
                                     {pathname.indexOf('calendar') !== -1 &&
                                     <CalendarComponent/>
                                     }
-                                    {/*{pathname.indexOf('new') !== -1 &&*/}
-                                    {/*<New/>*/}
-                                    {/*}*/}
                                     {pathname.indexOf('edit') !== -1 &&
                                     <Edit params={pathname}/>
                                     }
