@@ -32,7 +32,7 @@ module.exports = (
             </Route>
             <Route path="login" component={Login} />
             <Route path="logged-out" component={Login} />
-            <IndexRoute component={Login} />
+            <IndexRoute component={Dashboard} />
         </Route>
     </Router>
 

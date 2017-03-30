@@ -113,9 +113,10 @@ router.get('/api/tags/:googleId/:tagText', function(req, res) {
 });
 
 // Update an entry by entryId. Verifies permission on googleId.
-router.put('/api/entries', function(req, res) {
+router.put('/api/entries/:tagless?', function(req, res) {
     var googleId = req.body.googleId;
     var entryId = req.body.entryId;
+    var tagless = req.params.tagless || null;
     var date = req.body.date;
     var text = req.body.text;
     var tags = req.body.tags;
@@ -127,25 +128,28 @@ router.put('/api/entries', function(req, res) {
                     date: date,
                     text: text
                 }).then(function(entry) {
-                    if (tags) {
-                        var tagIds = [];
-                        var tagCount = 0;
-                        tags.forEach(function (tag) {
-                            db.Tag.findOrCreate({where: {text: tag}}).spread(function (tagInstance) {
-                                tagCount += 1;
-                                tagIds.push(tagInstance.id);
+                    if (!tagless) {
+                        if (tags) {
+                            var tagIds = [];
+                            var tagCount = 0;
+                            tags.forEach(function (tag) {
+                                db.Tag.findOrCreate({where: {text: tag}}).spread(function (tagInstance) {
+                                    tagCount += 1;
+                                    tagIds.push(tagInstance.id);
 
-                                // We want to set the tags inside of the callback to make sure it's async, but we only
-                                // want to do it once, so we can use 'setAssociations' and thus wipe out any removed
-                                // tags while we're at it. So we're going to test when to break and set the tags by index.
-                                if (tagCount === tags.length) {
-                                    entry.setEntryHasTags(tagIds);
-                                }
+                                    // We want to set the tags inside of the callback to make sure it's async, but we only
+                                    // want to do it once, so we can use 'setAssociations' and thus wipe out any removed
+                                    // tags while we're at it. So we're going to test when to break and set the tags by index.
+                                    if (tagCount === tags.length) {
+                                        entry.setEntryHasTags(tagIds);
+                                    }
+                                });
                             });
-                        });
-                    } else {
-                        entry.setEntryHasTags();
+                        } else {
+                            entry.setEntryHasTags();
+                        }
                     }
+
                 });
             } else {
                 res.json('Permission denied.');
