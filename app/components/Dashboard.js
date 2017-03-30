@@ -28,7 +28,11 @@ var Dashboard = React.createClass({
     },
     render: function () {
 
-        let pathname = this.props.location.split('/');
+        let location = this.props.location;
+        let pathname = location.split('/');
+
+        // Add logic to allow the root to display 'Home'.
+        let showHome = pathname.indexOf('home') !== -1 || location === '/';
 
         return (
             <div className='dashboard-page ui-view'>
@@ -100,7 +104,7 @@ var Dashboard = React.createClass({
                                     {pathname.indexOf('tags') !== -1 &&
                                     <TagView params={pathname}/>
                                     }
-                                    {pathname.indexOf('home') !== -1 &&
+                                    {showHome &&
                                     <Home/>
                                     }
                                     {pathname.indexOf('settings') !== -1 &&
