@@ -79,8 +79,10 @@
 @media only screen and (max-width: 767px) {
     .xs-only {
         display: block;
+        z-index: 1000;
+        height: 50px;
     }
     .main {
-        margin-top: 25px;
+        top: 50px !important;
     }
 }

@@ -14,26 +14,9 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-}
+    flex: 1;
+    max-height: 100%;
 
-.rbc-month-row .rbc-row-content,
-.rbc-month-row .rbc-event {
-    max-height: 70%;
-    min-height: 60px;
-}
-
-.rbc-row-segment {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-}
-
-.rbc-month-row .rbc-row-segment {
-    justify-content: center;
-}
-
-.rbc-event-content {
-    white-space: normal !important;
 }
 
 @media only screen and (max-width: 600px) {

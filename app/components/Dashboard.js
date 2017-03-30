@@ -92,9 +92,9 @@ var Dashboard = React.createClass({
                                     {pathname.indexOf('calendar') !== -1 &&
                                     <CalendarComponent/>
                                     }
-                                    {pathname.indexOf('new') !== -1 &&
-                                    <New/>
-                                    }
+                                    {/*{pathname.indexOf('new') !== -1 &&*/}
+                                    {/*<New/>*/}
+                                    {/*}*/}
                                     {pathname.indexOf('edit') !== -1 &&
                                     <Edit params={pathname}/>
                                     }

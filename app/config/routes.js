@@ -9,7 +9,7 @@ var Main = require('../components/Main');
 var Dashboard = require('../components/Dashboard');
 var Login = require('../components/Login');
 var Calendar = require('../components/dashboard/calendar/Calendar');
-var New = require('../components/dashboard/entries/New');
+// var New = require('../components/dashboard/entries/New');
 var Home = require('../components/dashboard/home/Home');
 var TagView = require('../components/dashboard/home/TagView');
 var Settings = require('../components/dashboard/settings/Settings');
@@ -25,7 +25,7 @@ module.exports = (
                 <Route path="calendar" component={Calendar} />
                 <Route path="home" component={Home} />
                 <Route path="tags/:tagText" component={TagView} />
-                <Route path="new" component={New} />
+                {/*<Route path="new" component={New} />*/}
                 <Route path="users/:googleId/entries/:entryId/edit" component={Edit} />
                 <Route path="settings" component={Settings} />
                 <IndexRoute component={Home} />
