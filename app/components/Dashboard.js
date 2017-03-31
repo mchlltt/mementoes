@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import {Link} from 'react-router';
 import {Navbar, Nav, NavDropdown, MenuItem} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import $ from 'jquery';
@@ -8,7 +8,8 @@ import Home from './dashboard/home/Home';
 import New from './dashboard/entries/New';
 import TagView from './dashboard/home/TagView';
 import Edit from './dashboard/entries/Edit';
-import CalendarComponent from './dashboard/calendar/Calendar';
+import About from './dashboard/about/About';
+import Calendar from './dashboard/calendar/Calendar';
 import Settings from './dashboard/settings/Settings';
 
 import GetService from '../utils/getService';
@@ -48,20 +49,29 @@ var Dashboard = React.createClass({
                                 <a href='/api/logout'
                                    className='btn btn-white btn-outline btn-rounded'>Log Out</a>
                             </div>
+                            <div className="sidebar-container">
 
                             <ul className='nav nav-sidebar'>
                                 <li>
-                                    <Link to ='/dashboard/home'>Home</Link>
+                                    <Link to='/dashboard/home'>Home</Link>
                                 </li>
                                 <li>
-                                    <Link to ='/dashboard/calendar'>Calendar</Link>
+                                    <Link to='/dashboard/calendar'>Calendar</Link>
                                 </li>
                                 <li>
-                                    <Link to ='/dashboard/settings'>Settings</Link>
+                                    <Link to='/dashboard/settings'>Settings</Link>
                                 </li>
                             </ul>
+
+                            <ul className='bottom-nav nav nav-sidebar'>
+                                <li>
+                                    <Link to='/dashboard/about'>About</Link>
+                                </li>
+                            </ul>
+
                         </div>
 
+                        </div>
                         <div className='col-xs-12 xs-only'>
                             <Navbar.Header>
                                 <Nav>
@@ -69,21 +79,25 @@ var Dashboard = React.createClass({
                                         <Link to='/dashboard/home'>Mementoes</Link>
                                     </Navbar.Brand>
                                     <Nav pullRight>
-                                    <NavDropdown
-                                        title='Menu'
-                                        id='basic-nav-dropdown'
-                                        pullRight
-                                    >
-                                        <LinkContainer to='/dashboard/home'>
-                                            <MenuItem>Home</MenuItem>
-                                        </LinkContainer>
-                                        <LinkContainer to='/dashboard/calendar'>
-                                            <MenuItem>Calendar</MenuItem>
-                                        </LinkContainer>
-                                        <LinkContainer to='/dashboard/settings'>
-                                            <MenuItem>Settings</MenuItem>
-                                        </LinkContainer>
-                                    </NavDropdown>
+                                        <NavDropdown
+                                            title='Menu'
+                                            id='basic-nav-dropdown'
+                                            pullRight
+                                        >
+                                            <LinkContainer to='/dashboard/home'>
+                                                <MenuItem>Home</MenuItem>
+                                            </LinkContainer>
+                                            <LinkContainer to='/dashboard/calendar'>
+                                                <MenuItem>Calendar</MenuItem>
+                                            </LinkContainer>
+                                            <LinkContainer to='/dashboard/settings'>
+                                                <MenuItem>Settings</MenuItem>
+                                            </LinkContainer>
+                                            <MenuItem divider />
+                                            <LinkContainer to='/dashboard/about'>
+                                                <MenuItem>About</MenuItem>
+                                            </LinkContainer>
+                                        </NavDropdown>
                                     </Nav>
                                 </Nav>
                             </Navbar.Header>
@@ -95,9 +109,9 @@ var Dashboard = React.createClass({
                                                  transitionLeaveTimeout={300}
                         >
                             {React.cloneElement(<div
-                                className='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main ng-scope ui-view'>
+                                    className='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main ng-scope ui-view'>
                                     {pathname.indexOf('calendar') === 2 &&
-                                    <CalendarComponent/>
+                                    <Calendar/>
                                     }
                                     {pathname.indexOf('edit') === 6 &&
                                     <Edit params={pathname}/>
@@ -114,7 +128,10 @@ var Dashboard = React.createClass({
                                     {pathname.indexOf('settings') === 2 &&
                                     <Settings/>
                                     }
-                                </div> || <div />, { key: pathname.join('/') })}
+                                    {pathname.indexOf('about') === 2 &&
+                                    <About/>
+                                    }
+                                </div> || <div />, {key: pathname.join('/')})}
                         </ReactCSSTransitionGroup>
                     </div>
                 </div>

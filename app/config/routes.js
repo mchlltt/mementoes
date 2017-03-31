@@ -14,6 +14,7 @@ var Home = require('../components/dashboard/home/Home');
 var TagView = require('../components/dashboard/home/TagView');
 var Settings = require('../components/dashboard/settings/Settings');
 var Edit = require('../components/dashboard/entries/Edit');
+var About = require('../components/dashboard/about/About');
 
 // Export the Routes
 module.exports = (
@@ -26,6 +27,7 @@ module.exports = (
                 <Route path="home" component={Home} />
                 <Route path="tags/:tagText" component={TagView} />
                 <Route path="new" component={New} />
+                <Route path="about" component={About} />
                 <Route path="users/:googleId/entries/:entryId/edit" component={Edit} />
                 <Route path="settings" component={Settings} />
                 <IndexRoute component={Home} />

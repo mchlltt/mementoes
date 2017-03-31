@@ -40,9 +40,10 @@ var TagView = React.createClass({
         return (
             <div key="/dashboard/tags">
                 <Link to="/dashboard/home" className="pull-right btn btn-primary btn-outline btn-rounded">Home</Link>
-                <h2>Entries tagged with '{decodeURIComponent(this.props.params[3])}'</h2>
+                <Link to="/dashboard/new" className="pull-right btn btn-success btn-outline btn-rounded">New Memento</Link>
+                <h2>Mementoes tagged with '{decodeURIComponent(this.props.params[3])}'</h2>
                 <Jumbotron>
-                    {this.state.entries &&
+                    {this.state.entries && this.state.entries.length > 0 &&
                     this.state.entries.map(function (entry, i) {
                         return (
                             <Panel
@@ -55,6 +56,11 @@ var TagView = React.createClass({
                             </Panel>
                         )
                     })
+                    }
+                    {this.state.entries && this.state.entries.length === 0 &&
+                        <Panel bsStyle='danger'>
+                            No Mementoes found with the tag '{decodeURIComponent(this.props.params[3])}'.
+                        </Panel>
                     }
                 </Jumbotron>
             </div>
