@@ -1,6 +1,8 @@
+// Import dependencies.
 import React from 'react';
 
-var Login = React.createClass({
+// Create component.
+let Login = React.createClass({
 
     render: function () {
         return (

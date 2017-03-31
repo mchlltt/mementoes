@@ -1,8 +1,10 @@
+// Import dependencies and components.
 import React from 'react';
 import {Link} from 'react-router';
 import {Jumbotron} from 'react-bootstrap';
 
-var About = React.createClass({
+// Create component.
+let About = React.createClass({
     getInitialState: function () {
         return {}
     },
@@ -37,7 +39,6 @@ var About = React.createClass({
                     <br/>
                     <p><strong>Thank you for using Mementoes!</strong></p>
                     <p>Mich Elliott, developer</p>
-
                 </Jumbotron>
             </div>
         );

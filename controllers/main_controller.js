@@ -12,6 +12,7 @@ router.post('/api/entries', function (req, res) {
     var date = req.body.date;
     var text = req.body.text;
     var tags = req.body.tags;
+
     if (googleId && date && text) {
         db.Entry.create({
             googleId: googleId,
@@ -36,84 +37,112 @@ router.post('/api/entries', function (req, res) {
 // Get one random entry by googleId.
 router.get('/api/entries/random/:googleId', function (req, res) {
     var googleId = req.params.googleId;
+    var headerId = req.headers['x-mementoes-id'];
 
-    db.sequelize.query(
-        'SELECT Entries.id ' +
-        'FROM Entries ' +
-        'WHERE Entries.googleId = :googleId ' +
-        'ORDER BY RAND() ' +
-        'LIMIT 1',
-        {replacements: {googleId}, type: db.sequelize.QueryTypes.SELECT}
-    ).then(function(entry) {
-        db.Entry.findById(entry[0].id, {include: [db.Entry.tagAssociation]}).then(function(result) {
-            res.json(result);
+    if (googleId === headerId) {
+        db.sequelize.query(
+            'SELECT Entries.id ' +
+            'FROM Entries ' +
+            'WHERE Entries.googleId = :googleId ' +
+            'ORDER BY RAND() ' +
+            'LIMIT 1',
+            {replacements: {googleId}, type: db.sequelize.QueryTypes.SELECT}
+        ).then(function (entry) {
+            if (entry[0]) {
+                db.Entry.findById(entry[0].id, {include: [db.Entry.tagAssociation]}).then(function (result) {
+                    res.json(result);
+                });
+            } else {
+                res.sendStatus(404);
+            }
         });
-    });
-});
-
-// Get entries by googleId.
-router.get('/api/entries/:googleId/:entryId?', function (req, res) {
-    var googleId = req.params.googleId;
-    var entryId = req.params.entryId || null;
-    if (entryId) {
-        db.Entry.findAll({where: {googleId: googleId, id: entryId}, include: [db.Entry.tagAssociation]}).then(
-            function (result) {
-                res.json(result);
-            }
-        );
     } else {
-        db.Entry.findAll({where: {googleId: googleId}, include: [db.Entry.tagAssociation]}).then(
-            function (result) {
-                res.json(result);
-            }
-        );
+        res.sendStatus(401);
     }
 });
 
-// Get a user's tag frequency.
-router.get('/api/tags/:googleId', function(req, res) {
+// Get one specific or all entries by googleId.
+router.get('/api/entries/:googleId/:entryId?', function (req, res) {
     var googleId = req.params.googleId;
+    var headerId = req.headers['x-mementoes-id'];
+    var entryId = req.params.entryId || null;
 
-    db.sequelize.query(
-        'SELECT Tags.text AS value, COUNT(Tags.text) AS count FROM Entries ' +
-        'JOIN EntryTag ON EntryTag.entryId = Entries.id ' +
-        'JOIN Tags ON EntryTag.tagId = Tags.id ' +
-        'WHERE Entries.googleId = :googleId ' +
-        'GROUP BY Tags.text',
-        { replacements: { googleId }, type: db.sequelize.QueryTypes.SELECT }
-    ).then(function(entries) {
-        res.json(entries);
-    });
+    if (googleId === headerId) {
+        if (entryId) {
+            db.Entry.findAll({where: {googleId: googleId, id: entryId}, include: [db.Entry.tagAssociation]}).then(
+                function (result) {
+                    res.json(result);
+                }
+            );
+        } else {
+            db.Entry.findAll({where: {googleId: googleId}, include: [db.Entry.tagAssociation]}).then(
+                function (result) {
+                    res.json(result);
+                }
+            );
+        }
+    } else {
+        res.sendStatus(401);
+    }
 });
 
-// Get a user's entries by tag text.
-router.get('/api/tags/:googleId/:tagText', function(req, res) {
+// Get a user's tag usage frequency.
+router.get('/api/tags/:googleId', function (req, res) {
     var googleId = req.params.googleId;
+    var headerId = req.headers['x-mementoes-id'];
+
+    if (googleId === headerId) {
+        db.sequelize.query(
+            'SELECT Tags.text AS value, COUNT(Tags.text) AS count FROM Entries ' +
+            'JOIN EntryTag ON EntryTag.entryId = Entries.id ' +
+            'JOIN Tags ON EntryTag.tagId = Tags.id ' +
+            'WHERE Entries.googleId = :googleId ' +
+            'GROUP BY Tags.text',
+            {replacements: {googleId}, type: db.sequelize.QueryTypes.SELECT}
+        ).then(function (entries) {
+            res.json(entries);
+        });
+    } else {
+        res.sendStatus(401);
+    }
+});
+
+// Get a user's entries by tag.
+router.get('/api/tags/:googleId/:tagText', function (req, res) {
+    var googleId = req.params.googleId;
+    var headerId = req.headers['x-mementoes-id'];
     var tagText = req.params.tagText;
 
-    db.sequelize.query(
-        'SELECT Entries.id ' +
-        'FROM Entries ' +
-        'JOIN EntryTag ON EntryTag.entryId = Entries.id ' +
-        'JOIN Tags ON EntryTag.tagId = Tags.id ' +
-        'WHERE Entries.googleId = :googleId ' +
-        'AND Tags.text = :tagText;',
-        { replacements: { googleId, tagText }, type: db.sequelize.QueryTypes.SELECT }
-    ).then(function(entries) {
-        var entryIds = [];
-        entries.forEach(function(entry) {
-            entryIds.push(entry.id);
+    if (googleId === headerId) {
+        db.sequelize.query(
+            'SELECT Entries.id ' +
+            'FROM Entries ' +
+            'JOIN EntryTag ON EntryTag.entryId = Entries.id ' +
+            'JOIN Tags ON EntryTag.tagId = Tags.id ' +
+            'WHERE Entries.googleId = :googleId ' +
+            'AND Tags.text = :tagText;',
+            {replacements: {googleId, tagText}, type: db.sequelize.QueryTypes.SELECT}
+        ).then(function (entries) {
+            var entryIds = [];
+            entries.forEach(function (entry) {
+                entryIds.push(entry.id);
+            });
+            db.Entry.findAll({
+                where: {googleId: googleId, id: {$in: entryIds}},
+                include: [db.Entry.tagAssociation]
+            }).then(
+                function (result) {
+                    res.json(result);
+                }
+            );
         });
-        db.Entry.findAll({where: {googleId: googleId, id: {$in: entryIds}}, include: [db.Entry.tagAssociation]}).then(
-            function (result) {
-                res.json(result);
-            }
-        );
-    });
+    } else {
+        res.sendStatus(401);
+    }
 });
 
 // Update an entry by entryId. Verifies permission on googleId.
-router.put('/api/entries', function(req, res) {
+router.put('/api/entries', function (req, res) {
     var googleId = req.body.googleId;
     var entryId = req.body.entryId;
     var tagless = req.params.tagless || false;
@@ -127,7 +156,7 @@ router.put('/api/entries', function(req, res) {
                 entry.update({
                     date: date,
                     text: text
-                }).then(function(entry) {
+                }).then(function (entry) {
                     if (!tagless) {
                         if (tags) {
                             var tagIds = [];
@@ -149,10 +178,9 @@ router.put('/api/entries', function(req, res) {
                             entry.setEntryHasTags();
                         }
                     }
-
                 });
             } else {
-                res.json('Permission denied.');
+                res.sendStatus(404);
             }
         }).then(function (data) {
             res.json(data);
@@ -163,33 +191,51 @@ router.put('/api/entries', function(req, res) {
 });
 
 // Delete an entry by entryId. Verifies permission on googleId.
-router.delete('/api/entries/:googleId/:entryId', function(req, res) {
+router.delete('/api/entries/:googleId/:entryId', function (req, res) {
     var googleId = req.params.googleId;
+    var headerId = req.headers['x-mementoes-id'];
     var entryId = req.params.entryId;
 
-    db.Entry.findById(entryId).then(
-        function (entry) {
-            if (entry.googleId === googleId) {
-                entry.destroy();
-                res.json(true);
-            } else {
-                res.json('Permission denied.');
+    if (googleId === headerId) {
+        db.Entry.findById(entryId).then(
+            function (entry) {
+                if (entry) {
+                    if (entry.googleId === googleId) {
+                        entry.destroy();
+                        res.sendStatus(200);
+                    } else {
+                        res.sendStatus(401);
+                    }
+                } else {
+                    res.sendStatus(404);
+                }
             }
-        }
-    );
+        );
+    } else {
+        res.sendStatus(401);
+    }
 });
 
 // Delete user by googleId.
-router.delete('/api/users/:googleId', function(req, res) {
+router.delete('/api/users/:googleId', function (req, res) {
+    var headerId = req.headers['x-mementoes-id'];
     var googleId = req.params.googleId;
 
-    db.User.findById(googleId).then(
-        function(user) {
-            if (user) {
-                user.destroy();
+    if (googleId === headerId) {
+        db.User.findById(googleId).then(
+            function (user) {
+                if (user) {
+                    user.destroy();
+                    res.sendStatus(200);
+                } else {
+                    res.sendStatus(404);
+                }
             }
-        }
-    );
+        );
+    } else {
+        res.sendStatus(401);
+    }
+
 });
 
 // Default route.

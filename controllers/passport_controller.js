@@ -6,11 +6,11 @@ var passport = require('passport');
 // Initialize express router.
 var router = express.Router();
 
-// GET /auth/google
+// GET route for Google auth.
 router.get('/auth/google',
     passport.authenticate('google', {scope: ['openid email profile']}));
 
-// GET /auth/google/callback
+// GET route for Google auth callback.
 router.get('/auth/google/callback',
     passport.authenticate('google', {
         failureRedirect: '/login'
@@ -29,7 +29,7 @@ router.get('/auth/google/callback',
         });
     });
 
-// API route for verifying log in.
+// GET route for verifying that a user is authenticated.
 router.get('/api/verify', function (req, res) {
     if (req.isAuthenticated()) {
         res.json(
@@ -42,7 +42,7 @@ router.get('/api/verify', function (req, res) {
     }
 });
 
-// API route for logging out.
+// GET route for logging a user out.
 router.get('/api/logout', function (req, res) {
     module.exports.loggedIn = false;
     req.logout();

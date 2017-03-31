@@ -1,19 +1,29 @@
-let axios = require('axios');
+// Import dependency.
+import axios from 'axios';
 
+// Define service class that can be imported and used to hit different GET endpoints.
 export default class GetService {
-
     constructor(url) {
         this.url = url;
     }
+    getRoute(params, id) {
+        let config;
 
-    get(params) {
-        let queryString;
         if (params) {
-            queryString = this.url + params.join('/');
+            config = {
+                method: 'get',
+                url: this.url + params.join('/'),
+                headers: {'X-Mementoes-ID': id}
+            };
         } else {
-            queryString = this.url;
+            config = {
+                url: this.url
+            };
         }
-        return axios(queryString).then(
+
+        console.log(config);
+
+        return axios(config).then(
             function(response) {
                 return response.data;
             }

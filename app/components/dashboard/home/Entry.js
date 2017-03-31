@@ -1,9 +1,10 @@
-var React = require('react');
+// Import dependencies and components.
+import React from 'react';
 import moment from 'moment';
+import Tags from '../calendar/Tags';
 
-var Tags = require('../calendar/Tags');
-
-var Entry = React.createClass({
+// Create component.
+let Entry = React.createClass({
     render: function render() {
         return(
             <div>

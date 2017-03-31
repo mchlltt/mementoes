@@ -1,9 +1,10 @@
-var React = require('react');
+// Import dependencies and components.
+import React from 'react';
 import {Link} from 'react-router';
+import Tags from './Tags';
 
-var Tags = require('./Tags');
-
-var Event = React.createClass({
+// Create component.
+let Event = React.createClass({
     render: function render() {
         return(
             <div>

@@ -1,22 +1,26 @@
+// Import dependencies, components, and services.
 import React from 'react';
-import GetService from '../../../utils/getService';
-import Entry from './Entry';
 import {Link} from 'react-router';
 import {Panel, Jumbotron} from 'react-bootstrap';
-var getTaggedEntries = new GetService('/api/tags/');
-var verifyService = new GetService('/api/verify/');
+import Entry from './Entry';
+import GetService from '../../../utils/getService';
 
-var TagView = React.createClass({
+// Construct services.
+let getTaggedEntries = new GetService('/api/tags/');
+let verifyService = new GetService('/api/verify/');
+
+// Create component.
+let TagView = React.createClass({
     getInitialState: function () {
         return {};
     },
     componentWillMount: function () {
-        verifyService.get().then(function (res) {
-            getTaggedEntries.get([res.googleId, this.props.params[3]]).then(function (response) {
-                var entries = [];
+        verifyService.getRoute().then(function (res) {
+            getTaggedEntries.getRoute([res.googleId, this.props.params[3]], res.googleId).then(function (response) {
+                let entries = [];
 
                 response.forEach(function (entry) {
-                    var tags = [];
+                    let tags = [];
 
                     if (entry.entryHasTags) {
                         entry.entryHasTags.forEach(function (tag) {

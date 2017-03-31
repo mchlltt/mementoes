@@ -1,24 +1,29 @@
+// Import dependencies, components, and services.
 import React from 'react';
+import moment from 'moment';
+import $ from 'jquery';
+import {browserHistory} from 'react-router';
 import {Button, FormControl} from 'react-bootstrap';
 import {ToastContainer, ToastMessage} from 'react-toastr';
-import {browserHistory} from 'react-router';
 import DatePicker from 'react-datepicker';
 import TagsInput from 'react-tagsinput';
-import moment from 'moment';
 import PutService from '../../../utils/putService';
 import PostService from '../../../utils/postService';
 import DeleteService from '../../../utils/deleteService';
 import GetService from '../../../utils/getService';
 
-window.jQuery = require('jquery');
-var ToastMessageFactory = React.createFactory(ToastMessage.jQuery);
+// Create ToastMessageFactory with jQuery transition effects.
+window.jQuery = $;
+let ToastMessageFactory = React.createFactory(ToastMessage.jQuery);
 
-var postEntry = new PostService('/api/entries/');
-var putEntry = new PutService('/api/entries/');
-var deleteEntry = new DeleteService('/api/entries/');
-var getEntries = new GetService('/api/entries/');
+// Construct services for CRUD operations.
+let postEntry = new PostService('/api/entries/');
+let putEntry = new PutService('/api/entries/');
+let deleteEntry = new DeleteService('/api/entries/');
+let getEntries = new GetService('/api/entries/');
 
-var EntryForm = React.createClass({
+// Create component.
+let EntryForm = React.createClass({
     addAlert: function(message) {
         this.refs.container.success(message);
         setTimeout(this.closeAlert, 2000);
@@ -35,7 +40,7 @@ var EntryForm = React.createClass({
     },
     componentWillMount: function () {
         if (this.props.entryId) {
-            getEntries.get([this.props.googleId, this.props.entryId]).then(function(response) {
+            getEntries.getRoute([this.props.googleId, this.props.entryId], this.props.googleId).then(function(response) {
                 let entry = response[0].text;
                 let date = moment(response[0].date);
                 let tagsResponse = response[0].entryHasTags;
@@ -70,12 +75,12 @@ var EntryForm = React.createClass({
     onSubmit: function(e) {
         e.preventDefault();
 
-        var tags = this.state.tags;
-        var text = this.state.entry;
-        var date = new Date(this.state.date);
+        let tags = this.state.tags;
+        let text = this.state.entry;
+        let date = new Date(this.state.date);
 
         if (this.props.entryId) {
-            putEntry.put({
+            putEntry.putItem({
                 entryId: this.props.entryId,
                 googleId: this.props.googleId,
                 text: text,
@@ -85,7 +90,7 @@ var EntryForm = React.createClass({
             this.addAlert('Memento edit saved!');
             setTimeout(browserHistory.goBack, 2000);
         } else {
-            postEntry.post({
+            postEntry.postItem({
                 googleId: this.props.googleId,
                 text: text,
                 tags: tags,
@@ -102,7 +107,7 @@ var EntryForm = React.createClass({
         }
     },
     handleTextChange: function(event) {
-        var newState = {};
+        let newState = {};
         newState[event.target.id] = event.target.value;
         this.setState(newState);
     },
@@ -110,7 +115,7 @@ var EntryForm = React.createClass({
         this.setState({date: date});
 
         // Get the formatted version of the date.
-        var formattedDate = date.format('MMMM Do');
+        let formattedDate = date.format('MMMM Do');
 
         // If the formatted version of the date is the same as the formatted version of today's date, use 'today'.
         if (formattedDate === moment().format('MMMM Do')) {
@@ -124,7 +129,7 @@ var EntryForm = React.createClass({
         this.setState({tags})
     },
     handleDelete: function() {
-        deleteEntry.delete([this.props.googleId, this.props.entryId]);
+        deleteEntry.deleteItem([this.props.googleId, this.props.entryId], this.props.googleId);
         this.addAlert('Memento deleted!');
         setTimeout(browserHistory.goBack, 2000);
     },

@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "mementoes_db",
-    "host": "127.0.0.1",
+    "username": "g1ebo7625yaid024",
+    "password": "vn07wd428fudq2tp",
+    "database": "ue33b3ikfahla6uw",
+    "host": "l7cup2om0gngra77.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "production": {

@@ -1,8 +1,10 @@
+// Import dependencies and components.
 import React from 'react';
 import {Button, FormControl} from 'react-bootstrap';
 import DeleteModal from './DeleteModal';
 
-var Delete = React.createClass({
+// Create component.
+let Delete = React.createClass({
     getInitialState: function() {
         return({modal: false})
     },

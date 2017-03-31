@@ -1,8 +1,9 @@
-var React = require('react');
+// Import dependencies and components.
+import React from 'react';
+import Tag from './Tag';
 
-var Tag = require('./Tag');
-
-var Tags = React.createClass({
+// Create component.
+let Tags = React.createClass({
     render: function render() {
         function tagToURL(tag) {
             return '/dashboard/tags/' + tag.toLowerCase();

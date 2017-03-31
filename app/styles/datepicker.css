@@ -21,10 +21,10 @@
     border: 0.45em solid transparent;
 }
 .react-datepicker__navigation--previous {
-    border-right-color: #ccc;
+    border-right-color: rgb(204, 204, 204);
     left: 1em;
 }
 .react-datepicker__navigation--next {
-    border-left-color: #ccc;
+    border-left-color: rgb(204, 204, 204);
     right: 1em;
 }
