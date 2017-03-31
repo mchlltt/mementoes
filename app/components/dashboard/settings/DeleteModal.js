@@ -1,16 +1,19 @@
+// Import dependencies, components, and services.
 import React from 'react';
-import {Button, FormControl, Modal} from 'react-bootstrap';
 import {browserHistory} from 'react-router';
+import {Button, FormControl, Modal} from 'react-bootstrap';
 import DeleteService from '../../../utils/deleteService';
 import GetService from '../../../utils/getService';
 
-var deleteUser = new DeleteService('/api/users/');
-var logOut = new GetService('/api/logout/');
+// Construct services.
+let deleteUser = new DeleteService('/api/users/');
+let logOut = new GetService('/api/logout/');
 
-const DeleteModal = React.createClass({
+// Create component.
+let DeleteModal = React.createClass({
     handleDelete() {
-        deleteUser.delete([this.props.googleId]);
-        logOut.get();
+        deleteUser.deleteItem([this.props.googleId]);
+        logOut.getRoute();
         browserHistory.push('/logged-out');
     },
     render() {

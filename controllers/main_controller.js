@@ -45,13 +45,17 @@ router.get('/api/entries/random/:googleId', function (req, res) {
         'LIMIT 1',
         {replacements: {googleId}, type: db.sequelize.QueryTypes.SELECT}
     ).then(function(entry) {
-        db.Entry.findById(entry[0].id, {include: [db.Entry.tagAssociation]}).then(function(result) {
-            res.json(result);
-        });
+        if (entry[0]) {
+            db.Entry.findById(entry[0].id, {include: [db.Entry.tagAssociation]}).then(function(result) {
+                res.json(result);
+            });
+        } else {
+            res.json({});
+        }
     });
 });
 
-// Get entries by googleId.
+// Get one specific or all entries by googleId.
 router.get('/api/entries/:googleId/:entryId?', function (req, res) {
     var googleId = req.params.googleId;
     var entryId = req.params.entryId || null;
@@ -70,7 +74,7 @@ router.get('/api/entries/:googleId/:entryId?', function (req, res) {
     }
 });
 
-// Get a user's tag frequency.
+// Get a user's tag usage frequency.
 router.get('/api/tags/:googleId', function(req, res) {
     var googleId = req.params.googleId;
 
@@ -86,7 +90,7 @@ router.get('/api/tags/:googleId', function(req, res) {
     });
 });
 
-// Get a user's entries by tag text.
+// Get a user's entries by tag.
 router.get('/api/tags/:googleId/:tagText', function(req, res) {
     var googleId = req.params.googleId;
     var tagText = req.params.tagText;
@@ -171,16 +175,16 @@ router.delete('/api/entries/:googleId/:entryId', function(req, res) {
         function (entry) {
             if (entry.googleId === googleId) {
                 entry.destroy();
-                res.json(true);
+                res.sendStatus(200);
             } else {
-                res.json('Permission denied.');
+                res.sendStatus(401);
             }
         }
     );
 });
 
 // Delete user by googleId.
-router.delete('/api/users/:googleId', function(req, res) {
+router.delete('/api/users/:googleId', function(req) {
     var googleId = req.params.googleId;
 
     db.User.findById(googleId).then(

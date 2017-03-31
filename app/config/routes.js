@@ -1,25 +1,21 @@
-// Include the React library
-var React = require('react');
+// Import dependencies.
+import React from 'react';
+import {Router, Route, browserHistory, IndexRoute} from 'react-router';
 
-// Include the react-router module
-import { Router, Route, browserHistory, IndexRoute } from 'react-router'
+// Import high-level components.
+import Main from '../components/Main';
+import Dashboard from '../components/Dashboard';
+import Login from '../components/Login';
+import Calendar from '../components/dashboard/calendar/Calendar';
+import New from '../components/dashboard/entries/New';
+import Home from '../components/dashboard/home/Home';
+import TagView from '../components/dashboard/home/TagView';
+import Settings from '../components/dashboard/settings/Settings';
+import Edit from '../components/dashboard/entries/Edit';
+import About from '../components/dashboard/about/About';
 
-// Reference the high-level components
-var Main = require('../components/Main');
-var Dashboard = require('../components/Dashboard');
-var Login = require('../components/Login');
-var Calendar = require('../components/dashboard/calendar/Calendar');
-var New = require('../components/dashboard/entries/New');
-var Home = require('../components/dashboard/home/Home');
-var TagView = require('../components/dashboard/home/TagView');
-var Settings = require('../components/dashboard/settings/Settings');
-var Edit = require('../components/dashboard/entries/Edit');
-var About = require('../components/dashboard/about/About');
-
-// Export the Routes
-module.exports = (
-
-    // The high level component is the Router component
+// Create routes.
+export default (
     <Router history={browserHistory}>
         <Route path="/" component={Main}>
             <Route path="dashboard" component={Dashboard}>
@@ -37,5 +33,4 @@ module.exports = (
             <IndexRoute component={Dashboard} />
         </Route>
     </Router>
-
 );

@@ -1,3 +1,4 @@
+// Import dependencies.
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
@@ -9,39 +10,41 @@ var sequelize = require('sequelize');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var partials = require('express-partials');
 
-// Sequelize
-
+// Import models.
 var db = require('./models');
 
-// Initialize app.
+// Initialize Express app.
 var app = express();
 
+// Session middleware.
 app.use(partials());
 app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 
-// Initialize Passport
+// Initialize Passport.
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Serve static content for the app from the "public" directory in the application directory.
+// Serve static content for the app from the 'public' directory in the application directory.
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Use Heroku's assigned PORT or 3000.
 var PORT = process.env.PORT || 3000;
 
-// Favicon
+// Serve favicon.
 app.use(favicon(path.join(__dirname, 'public/assets/images', 'favicon.png')));
 
-// Body Parser
+// Body Parser middleware.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Import routes and give the server access to them.
 var passportRoutes = require('./controllers/passport_controller');
 var mainRoutes = require('./controllers/main_controller');
-
 app.use('/', passportRoutes);
 app.use('/', mainRoutes);
 
+
+// Use local or Heroku copies of Passport secrets.
 var authConfig;
 try {
     authConfig = require('./config/auth');
@@ -56,10 +59,10 @@ try {
         };
 }
 
+// Passport methods.
 passport.serializeUser(function (user, done) {
     done(null, user);
 });
-
 passport.deserializeUser(function (obj, done) {
     done(null, obj);
 });
@@ -80,4 +83,3 @@ db.sequelize.sync().then(function() {
         console.log('listening on port ' + PORT);
     });
 });
-

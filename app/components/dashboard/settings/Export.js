@@ -1,23 +1,26 @@
+// Import dependencies, components, and services.
 import React from 'react';
+import moment from 'moment';
 import {CSVLink} from 'react-csv';
 import GetService from '../../../utils/getService';
-import moment from 'moment';
 
-var getEntries = new GetService('/api/entries/');
-var verifyService = new GetService('/api/verify/');
+// Construct services.
+let getEntries = new GetService('/api/entries/');
+let verifyService = new GetService('/api/verify/');
 
-var Export = React.createClass({
+// Create component.
+let Export = React.createClass({
     getInitialState: function () {
         return {
             data: []
         };
     },
     componentWillMount: function () {
-        verifyService.get().then(function (res) {
-            getEntries.get([res.googleId]).then(function (response) {
-                var entries = [];
+        verifyService.getRoute().then(function (res) {
+            getEntries.getRoute([res.googleId]).then(function (response) {
+                let entries = [];
                 response.forEach(function (entry) {
-                    var tags = [];
+                    let tags = [];
 
                     entry.entryHasTags.forEach(function(tag) {
                         tags.push(tag.text);

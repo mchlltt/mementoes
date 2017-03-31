@@ -1,26 +1,32 @@
+// Import dependencies, components, and services.
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Dashboard from './Dashboard';
 import Login from './Login';
+import GetService from '../utils/getService';
 
+// Import stylesheets from node_modules.
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-tagsinput/react-tagsinput.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+
+// Import stylesheets from the styles folder.
 import '../styles/calendar.css';
 import '../styles/datepicker.css';
 import '../styles/animate.css';
 import '../styles/toastr.min.css';
 import '../styles/mementoes.css';
 
-import GetService from '../utils/getService';
-var verifyService = new GetService('/api/verify/');
+// Construct services.
+let verifyService = new GetService('/api/verify/');
 
-var Main = React.createClass({
+// Create component.
+let Main = React.createClass({
     getInitialState: function () {
         return { }
     },
     componentWillMount: function() {
-        verifyService.get().then(function(response) {
+        verifyService.getRoute().then(function(response) {
             this.setState({
                 auth: response.auth,
                 googleId: response.googleId

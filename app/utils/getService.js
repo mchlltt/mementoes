@@ -1,4 +1,4 @@
-let axios = require('axios');
+import axios from 'axios';
 
 export default class GetService {
 
@@ -6,7 +6,7 @@ export default class GetService {
         this.url = url;
     }
 
-    get(params) {
+    getRoute(params) {
         let queryString;
         if (params) {
             queryString = this.url + params.join('/');

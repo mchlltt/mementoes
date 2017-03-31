@@ -1,8 +1,9 @@
-var React = require('react');
+// Import dependencies and components.
+import React from 'react';
 import {Link} from 'react-router';
 
-var Event = React.createClass({
-
+// Create components.
+let Event = React.createClass({
     render: function render() {
         return(
             <Link to={'/dashboard/users/' + this.props.event.googleId + '/entries/' + this.props.event.id + '/edit/'} className="plain-link">

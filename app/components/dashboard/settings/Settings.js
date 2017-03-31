@@ -1,18 +1,21 @@
+// Import dependencies, components, and services.
 import React from 'react';
-import {Jumbotron} from 'react-bootstrap';
 import {Link} from 'react-router';
+import {Jumbotron} from 'react-bootstrap';
 import Export from './Export';
 import Delete from './Delete';
-
 import GetService from '../../../utils/getService';
-var verifyService = new GetService('/api/verify/');
 
-var Settings = React.createClass({
+// Construct services.
+let verifyService = new GetService('/api/verify/');
+
+// Create component.
+let Settings = React.createClass({
     getInitialState: function () {
         return {}
     },
     componentWillMount: function () {
-        verifyService.get().then(function (response) {
+        verifyService.getRoute().then(function (response) {
             this.setState({googleId: response.googleId});
         }.bind(this));
     },

@@ -1,12 +1,16 @@
+// Import dependencies, components, and services.
 import React from 'react';
 import {Jumbotron} from 'react-bootstrap';
 import {Link} from 'react-router';
 import CalendarWidget from './CalendarWidget';
 import GetService from '../../../utils/getService';
-var getEntries = new GetService('/api/entries/');
-var verifyService = new GetService('/api/verify/');
 
-var Calendar = React.createClass({
+// Construct services.
+let getEntries = new GetService('/api/entries/');
+let verifyService = new GetService('/api/verify/');
+
+// Create component.
+let Calendar = React.createClass({
     getInitialState: function() {
         return {
             events: []
@@ -18,11 +22,11 @@ var Calendar = React.createClass({
         }
     },
     componentWillMount: function() {
-        verifyService.get().then(function(res) {
-            getEntries.get([res.googleId]).then(function(response) {
-                var events = [];
+        verifyService.getRoute().then(function(res) {
+            getEntries.getRoute([res.googleId]).then(function(response) {
+                let events = [];
                 response.forEach(function(event) {
-                    var tags = [];
+                    let tags = [];
 
                     event.entryHasTags.forEach(function(tag) {
                         tags.push(tag.text);

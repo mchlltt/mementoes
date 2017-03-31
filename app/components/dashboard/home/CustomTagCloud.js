@@ -1,13 +1,17 @@
+// Import dependencies and components.
 import React from 'react';
 import {TagCloud} from 'react-tagcloud';
 
+// Create and export component class.
+// I created this custom component because the default TagCloud refreshed anytime the page state changed.
 export default class CustomTagCloud extends TagCloud {
     constructor(props) {
         super(props);
         this.state = {};
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    // This method was the main purpose/fix. It checks whether the tags themselves have actually updated.
+    shouldComponentUpdate(nextProps) {
         return this.props.tags !== nextProps.tags;
     }
 

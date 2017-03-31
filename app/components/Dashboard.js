@@ -1,27 +1,30 @@
+// Import dependencies, components, and services.
 import React from 'react';
+import $ from 'jquery';
 import {Link} from 'react-router';
+import {LinkContainer} from 'react-router-bootstrap';
 import {Navbar, Nav, NavDropdown, MenuItem} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import $ from 'jquery';
-import {LinkContainer} from 'react-router-bootstrap';
 import Home from './dashboard/home/Home';
-import New from './dashboard/entries/New';
-import TagView from './dashboard/home/TagView';
-import Edit from './dashboard/entries/Edit';
-import About from './dashboard/about/About';
 import Calendar from './dashboard/calendar/Calendar';
 import Settings from './dashboard/settings/Settings';
-
+import New from './dashboard/entries/New';
+import Edit from './dashboard/entries/Edit';
+import TagView from './dashboard/home/TagView';
+import About from './dashboard/about/About';
 import GetService from '../utils/getService';
-var verifyService = new GetService('/api/verify/');
 
-var Dashboard = React.createClass({
+// Construct services.
+let verifyService = new GetService('/api/verify/');
+
+// Create component.
+let Dashboard = React.createClass({
     getInitialState: function () {
         return {}
     },
     componentWillMount: function () {
         this.setState({Height: $(window).height()});
-        verifyService.get().then(function (response) {
+        verifyService.getRoute().then(function (response) {
             this.setState({googleId: response.googleId});
         }.bind(this));
     },

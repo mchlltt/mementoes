@@ -38,11 +38,11 @@
 
 .xs-only {
     display: none;
-    background-color: #3ca2e0;
+    background-color: rgb(60, 162, 224);
 }
 
 .nav a {
-    color: white
+    color: rgb(255, 255, 255);
 }
 
 .panel-heading {
@@ -67,7 +67,7 @@
 
 .panel .plain-link,
 .panel .plain-link:hover{
-    color: #3ca2e0;
+    color: rgb(60, 162, 224);
 }
 
 .sidebar-container {

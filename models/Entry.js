@@ -1,6 +1,7 @@
+// Import Sequelize.
 var Sequelize = require('sequelize');
 
-// Model for tracking transactions
+// Model for storing entries.
 module.exports = function (sequelize, DataTypes) {
     var Entry = sequelize.define('Entry', {
         id: {
