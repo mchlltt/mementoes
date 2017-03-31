@@ -1,6 +1,7 @@
 import React from 'react';
 import {CSVLink} from 'react-csv';
 import GetService from '../../../utils/getService';
+import moment from 'moment';
 
 var getEntries = new GetService('/api/entries/');
 var verifyService = new GetService('/api/verify/');
@@ -16,7 +17,18 @@ var Export = React.createClass({
             getEntries.get([res.googleId]).then(function (response) {
                 var entries = [];
                 response.forEach(function (entry) {
-                    entries.push({entry: entry.text, date: entry.date});
+                    var tags = [];
+
+                    entry.entryHasTags.forEach(function(tag) {
+                        tags.push(tag.text);
+                    });
+
+                    entries.push({
+                        id: entry.id,
+                        title: entry.text,
+                        date: moment(entry.date).format().split('T')[0],
+                        tags: tags
+                    });
                 });
                 this.setState({data: entries});
             }.bind(this));
