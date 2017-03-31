@@ -1,12 +1,14 @@
 {
   "name": "Mementoes",
   "version": "1.0.0",
-  "description": "A React.js diary application.",
+  "description": "A React.js journaling application.",
   "main": "server.js",
   "scripts": {
     "dev": "webpack -w && node server.js",
     "server": "node server.js"
   },
+  "repository": "https://github.com/mchlltt/mementoes",
+  "license": "MIT",
   "dependencies": {
     "autoprefixer": "^6.0.2",
     "axios": "^0.15.3",
@@ -18,7 +20,6 @@
     "bootstrap": "^3.3.5",
     "bootstrap-social": "^4.9.1",
     "bundle-loader": "^0.5.4",
-    "chart.js": "^2.5.0",
     "classnames": "^2.2.0",
     "cookie-parser": "^1.4.3",
     "css-loader": "^0.27.3",

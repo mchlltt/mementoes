@@ -30,7 +30,9 @@ var New = React.createClass({
                 <h2>New Memento</h2>
                 <Jumbotron>
                     <h2>What is something that made you happy {this.state.dateDisplay}?</h2>
-                    <EntryForm setTerms={this.setTerms} googleId={this.state.googleId}/>
+                    {this.state.googleId &&
+                        <EntryForm setTerms={this.setTerms} googleId={this.state.googleId}/>
+                    }
                 </Jumbotron>
             </div>
         );
