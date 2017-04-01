@@ -79,7 +79,7 @@ let Home = React.createClass({
                         {!this.state.randomEntry &&
                         <h2>Random Memento</h2>
                         }
-                        {this.state.randomEntry &&
+                        {this.state.randomEntry && this.state.randomEntry.length > 0 &&
                         <div>
                             <h2>Random Memento
                                 from {moment(this.state.randomEntry.date.split('T')[0]).format('MMMM DD[,] YYYY')}</h2>
