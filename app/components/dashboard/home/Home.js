@@ -17,7 +17,8 @@ let verifyService = new GetService('/api/verify/');
 let Home = React.createClass({
     getInitialState: function () {
         return {
-            dateDisplay: 'today'
+            dateDisplay: 'today',
+            randomEntry: {}
         }
     },
     setTerms: function (dateDisplay) {
@@ -50,6 +51,7 @@ let Home = React.createClass({
             getTags.getRoute([idResponse.googleId]).then(function (tagResponse) {
                 this.getEntry(idResponse.googleId).then(function (entry) {
                     this.setState({data: tagResponse, randomEntry: entry});
+                    console.log(this.state);
                 }.bind(this));
             }.bind(this));
         }.bind(this));
@@ -76,10 +78,10 @@ let Home = React.createClass({
                         }
                     </Jumbotron>
                     <Jumbotron>
-                        {!this.state.randomEntry.date &&
+                        {!this.state.randomEntry || !this.state.randomEntry.date &&
                         <h2>Random Memento</h2>
                         }
-                        {this.state.randomEntry.date && this.state.randomEntry.date.length > 0 &&
+                        {this.state.randomEntry && this.state.randomEntry.date &&
                         <div>
                             <h2>Random Memento
                                 from {moment(this.state.randomEntry.date.split('T')[0]).format('MMMM DD[,] YYYY')}</h2>
