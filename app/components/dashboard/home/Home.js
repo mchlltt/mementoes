@@ -51,7 +51,6 @@ let Home = React.createClass({
             getTags.getRoute([idResponse.googleId]).then(function (tagResponse) {
                 this.getEntry(idResponse.googleId).then(function (entry) {
                     this.setState({data: tagResponse, randomEntry: entry});
-                    console.log(this.state);
                 }.bind(this));
             }.bind(this));
         }.bind(this));
