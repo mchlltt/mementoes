@@ -29,7 +29,11 @@
 }
 
 .login-button {
-    width: 300px;
+    margin-bottom: 20px !important;
+}
+
+.login-button h3{
+    margin: 5px;
 }
 
 .react-tagsinput-input {
@@ -43,6 +47,10 @@
 
 .nav a {
     color: rgb(255, 255, 255);
+}
+
+.about-link {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .panel-heading {
