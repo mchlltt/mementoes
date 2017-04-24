@@ -35,7 +35,7 @@ let New = React.createClass({
                 <Jumbotron>
                     <h2>What is something that made you happy {this.state.dateDisplay}?</h2>
                     {this.state.googleId &&
-                        <EntryForm setTerms={this.setTerms} googleId={this.state.googleId}/>
+                        <EntryForm setTerms={this.setTerms} googleId={this.state.googleId} goBack={true}/>
                     }
                 </Jumbotron>
             </div>

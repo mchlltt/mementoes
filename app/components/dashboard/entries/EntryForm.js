@@ -103,6 +103,10 @@ let EntryForm = React.createClass({
             this.handleReset();
 
             this.addAlert('New memento added!');
+
+            if (this.props.goBack) {
+                setTimeout(browserHistory.goBack, 2000);
+            }
         }
     },
     handleTextChange: function(event) {
