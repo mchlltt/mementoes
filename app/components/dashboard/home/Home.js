@@ -23,9 +23,9 @@ let Home = React.createClass({
     },
     setTerms: function (dateDisplay) {
         if (dateDisplay) {
-            this.setState({dateDisplay: dateDisplay});
+            this.setState({dateDisplay});
         } else {
-            this.setState({dateDisplay: 'today'});
+            this.setState({dateDisplay: 'today'})
         }
     },
     getEntry: function (googleId) {

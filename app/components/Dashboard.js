@@ -120,7 +120,7 @@ let Dashboard = React.createClass({
                                     <Edit params={pathname}/>
                                     }
                                     {pathname.indexOf('new') === 2 &&
-                                    <New />
+                                    <New params={pathname}/>
                                     }
                                     {pathname.indexOf('tags') === 2 &&
                                     <TagView params={pathname}/>

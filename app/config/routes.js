@@ -22,7 +22,7 @@ export default (
                 <Route path="calendar" component={Calendar} />
                 <Route path="home" component={Home} />
                 <Route path="tags/:tagText" component={TagView} />
-                <Route path="new" component={New} />
+                <Route path="new(/:date)" component={New}/>
                 <Route path="about" component={About} />
                 <Route path="users/:googleId/entries/:entryId/edit" component={Edit} />
                 <Route path="settings" component={Settings} />

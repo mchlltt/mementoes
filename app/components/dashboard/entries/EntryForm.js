@@ -39,6 +39,11 @@ let EntryForm = React.createClass({
         };
     },
     componentWillMount: function () {
+        if (this.props.date) {
+            this.setState({date: moment(this.props.date)});
+            this.handleDateChange(moment(this.props.date));
+        }
+
         if (this.props.entryId) {
             getEntries.getRoute([this.props.googleId, this.props.entryId]).then(function(response) {
                 let entry = response[0].text;
@@ -50,9 +55,7 @@ let EntryForm = React.createClass({
                 });
 
                 this.setState({
-                    entry: entry,
-                    date: date,
-                    tags: tags
+                    entry, tags, date
                 });
 
                 this.handleDateChange(date);
@@ -115,10 +118,8 @@ let EntryForm = React.createClass({
         this.setState(newState);
     },
     handleDateChange: function(date) {
+        this.setState({date});
 
-        this.setState({date: date});
-
-        // Get the formatted version of the date.
         let formattedDate = date.format('MMMM Do');
 
         // If the formatted version of the date is the same as the formatted version of today's date, use 'today'.

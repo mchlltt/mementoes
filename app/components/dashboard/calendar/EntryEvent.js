@@ -7,7 +7,7 @@ let Event = React.createClass({
     render: function render() {
         return(
             <Link to={'/dashboard/users/' + this.props.event.googleId + '/entries/' + this.props.event.id + '/edit/'} className="plain-link">
-                <span><strong>{this.props.title}</strong></span>
+                <span><strong>{this.props.event.title}</strong></span>
             </Link>
         )
     }

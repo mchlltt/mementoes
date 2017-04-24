@@ -4,6 +4,7 @@ import moment from 'moment';
 import BigCalendar from 'react-big-calendar';
 import EntryEvent from './EntryEvent';
 import EntryEventWithTags from './EntryEventWithTags';
+import {browserHistory} from 'react-router';
 
 // Tell BigCalendar to use Moment for localization.
 BigCalendar.setLocalizer(
@@ -16,12 +17,15 @@ let CalendarWidget = React.createClass({
         return (
             <BigCalendar
                 {...this.props}
+                selectable="ignoreEvents"
                 views={['month', 'week', 'day']}
+                onSelectSlot={slotInfo => browserHistory.push({
+                    pathname: '/dashboard/new/' + slotInfo.start.toISOString().split('T')[0]
+                })}
                 components={{
                     event: EntryEventWithTags,
-                    month: {
-                        event: EntryEvent
-                    }
+                    // Don't show tags in Month view.
+                    month: {event: EntryEvent}
                 }}
             />
         );

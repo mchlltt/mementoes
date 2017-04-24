@@ -17,14 +17,17 @@ let New = React.createClass({
     },
     setTerms: function (dateDisplay) {
         if (dateDisplay) {
-            this.setState({dateDisplay: dateDisplay});
+            this.setState({dateDisplay});
         } else {
-            this.setState({dateDisplay: 'today'});
+            this.setState({dateDisplay: 'today'})
         }
     },
     componentWillMount: function () {
         verifyService.getRoute().then(function (response) {
-            this.setState({googleId: response.googleId});
+            this.setState({
+                googleId: response.googleId,
+                date: this.props.params[3]
+            });
         }.bind(this));
     },
     render: function () {
@@ -35,7 +38,7 @@ let New = React.createClass({
                 <Jumbotron>
                     <h2>What is something that made you happy {this.state.dateDisplay}?</h2>
                     {this.state.googleId &&
-                        <EntryForm setTerms={this.setTerms} googleId={this.state.googleId} goBack={true}/>
+                        <EntryForm setTerms={this.setTerms} googleId={this.state.googleId} goBack={true} date={this.state.date}/>
                     }
                 </Jumbotron>
             </div>
