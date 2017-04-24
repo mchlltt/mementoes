@@ -36,6 +36,9 @@ let TagView = React.createClass({
                         tags: tags
                     });
                 });
+
+                entries = entries.reverse();
+
                 this.setState({entries});
             }.bind(this));
         }.bind(this));

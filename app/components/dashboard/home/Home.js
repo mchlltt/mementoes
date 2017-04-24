@@ -107,7 +107,6 @@ let Home = React.createClass({
                             minSize={20}
                             maxSize={50}
                             colorOptions={{
-                                luminosity: 'light',
                                 hue: 'blue'
                             }}
                             tags={this.state.data}
