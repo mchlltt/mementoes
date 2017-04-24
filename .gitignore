@@ -1,5 +1,6 @@
 node_modules
 npm-debug.log
+sessionSecret.js
 auth.json
 .idea
 Drawn-Mason-Jars-Collection

@@ -18,7 +18,16 @@ var app = express();
 
 // Session middleware.
 app.use(partials());
-app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+
+var sessionSecret;
+
+try {
+    sessionSecret = require('./config/sessionSecret.js');
+} catch(e) {
+    sessionSecret = process.env.sessionSecret;
+}
+
+app.use(session({ secret: sessionSecret, resave: false, saveUninitialized: false }));
 
 // Initialize Passport.
 app.use(passport.initialize());
