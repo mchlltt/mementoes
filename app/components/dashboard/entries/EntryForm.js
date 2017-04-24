@@ -64,7 +64,10 @@ let EntryForm = React.createClass({
         this.closeAlert();
     },
     handleReset: function(e) {
-        e.preventDefault();
+        if (e) {
+            e.preventDefault();
+        }
+
         this.setState({
             entry: '',
             date: moment(),
@@ -97,11 +100,7 @@ let EntryForm = React.createClass({
                 date: date
             });
 
-            this.setState({
-                entry: '',
-                date: moment(),
-                tags: []
-            });
+            this.handleReset();
 
             this.addAlert('New memento added!');
         }
@@ -112,6 +111,7 @@ let EntryForm = React.createClass({
         this.setState(newState);
     },
     handleDateChange: function(date) {
+
         this.setState({date: date});
 
         // Get the formatted version of the date.
