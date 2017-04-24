@@ -1,6 +1,5 @@
 var bootstrapPath = __dirname + '/node_modules/bootstrap/dist/css';
 var bootstrapSocialPath = __dirname + '/node_modules/bootstrap-social';
-var fontAwesomePath = __dirname + '/node_modules/font-awesome/css';
 
 module.exports = {
 
@@ -19,12 +18,11 @@ module.exports = {
             {test: /\.jsx?$/, include: /app/, loader: 'babel', query: {presets: ['react', 'es2015']}},
             {test: /\.css$/, loader: 'style!css'},
             {test: /\.less$/, loader: 'style!css!less'},
-            { test: /\.scss$/, loader: 'style!css!sass' },
-            { test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
-            { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
-            { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
-            { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" },
-            { test: /\.(png|jpg|jpeg|gif)$/, loader: 'url-loader?limit=10000' }
+            {test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff"},
+            {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream"},
+            {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file"},
+            {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml"},
+            {test: /\.(png|jpg|jpeg|gif)$/, loader: 'url-loader?limit=10000'}
         ]
     },
     // This lets us debug our react code in chrome dev tools. Errors will have lines and file names
@@ -33,7 +31,7 @@ module.exports = {
 
     resolve: {
         extensions: ['', '.js', '.css'],
-        modulesDirectories: ['node_modules', bootstrapPath, bootstrapSocialPath, fontAwesomePath]
+        modulesDirectories: ['node_modules', bootstrapPath, bootstrapSocialPath]
     },
     // Additional plugins for CSS post processing using postcss-loader
     postcss: [
